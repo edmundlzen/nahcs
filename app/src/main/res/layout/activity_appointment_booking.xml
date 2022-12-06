@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AppointmentBooking">
+
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="onClickBackButton"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="26dp"
+        android:text="Appointment"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ibBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBirthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Date"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnDate"
+        app:layout_constraintStart_toStartOf="@+id/btnDate" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDate"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/platinum_rounded_background"
+        android:elevation="1dp"
+        android:onClick="onClickSelectDateButton"
+        android:text="Select a date"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Time"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnTime"
+        app:layout_constraintStart_toStartOf="@+id/btnTime" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTime"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/platinum_rounded_background"
+        android:elevation="1dp"
+        android:onClick="onClickSelectTimeButton"
+        android:text="Select a time"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDate" />
+
+    <Button
+        android:id="@+id/btnDiscard"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#fc002c"
+        android:text="Discard"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnPost"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#00b52a"
+        android:text="Confirm"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnDiscard" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnDiscard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
