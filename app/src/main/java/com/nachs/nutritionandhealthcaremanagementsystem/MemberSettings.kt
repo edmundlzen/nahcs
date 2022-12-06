@@ -15,4 +15,8 @@ class MemberSettings : AppCompatActivity() {
         val switch: SwitchCompat = findViewById(R.id.switchNotifications)
         switch.isChecked = !switch.isChecked
     }
+
+    fun onClickBackButton(view: View) {
+        onBackPressed()
+    }
 }

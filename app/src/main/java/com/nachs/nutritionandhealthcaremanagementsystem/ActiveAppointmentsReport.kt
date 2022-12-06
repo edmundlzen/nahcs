@@ -7,10 +7,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class AppointmentBooking : AppCompatActivity() {
+class ActiveAppointmentsReport : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_appointment_booking)
+        setContentView(R.layout.activity_active_appointments_report)
     }
 
     fun onClickSelectDateButton(view: View) {

@@ -32,4 +32,8 @@ class EditAppointment : AppCompatActivity() {
             textView.text = time
         }
     }
+
+    fun onClickBackButton(view: View) {
+        onBackPressed()
+    }
 }
