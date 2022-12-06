@@ -14,7 +14,7 @@
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
-            android:name=".NutritionistContentPosting"
+            android:name=".BMICalculation"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
