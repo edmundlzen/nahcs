@@ -30,6 +30,16 @@
         <activity android:name=".UserLogin" />
         <activity android:name=".UserSignup" />
         <activity android:name=".UserResetPassword" />
+        <!--        <activity android:name=".Home" />-->
+        <activity android:name=".BMICalculation" />
+        <activity android:name=".MemberSettings" />
+        <activity android:name=".NutritionistSettings" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".NutritionistContentPosting" />
+        <activity android:name=".AppointmentBooking" />
+        <activity android:name=".EditAppointment" />
+        <activity android:name=".ActiveAppointmentsReport" />
+        <activity android:name=".AppointmentsHistoryReport" />
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,9 +12,13 @@ class Home : AppCompatActivity() {
     }
 
     fun onClickSettingsButton(view: View) {
-        val userType = intent.getStringExtra("userType")
-        val intent: Intent = Intent(this, MemberSettings::class.java)
-        val options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this)
-        startActivity(intent, options.toBundle())
+        val userType =
+            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE).getString("userType", "")
+        val intent: Intent = if (userType == "nutritionist") {
+            Intent(this, NutritionistSettings::class.java)
+        } else {
+            Intent(this, MemberSettings::class.java)
+        }
+        startActivity(intent)
     }
 }
