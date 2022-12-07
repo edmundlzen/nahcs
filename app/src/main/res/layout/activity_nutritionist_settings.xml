@@ -415,6 +415,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
             android:backgroundTint="#FF003D"
+            android:onClick="onClickLogoutButton"
             android:text="Log out"
             android:textAllCaps="false"
             android:textSize="16sp"

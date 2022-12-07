@@ -12,6 +12,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="#515931"
+        android:onClick="onClickLoginButton"
         android:text="Log In"
         android:textAllCaps="false"
         android:textSize="16sp"

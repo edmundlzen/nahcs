@@ -12,9 +12,10 @@ class UserTypeSelection : AppCompatActivity() {
         setContentView(R.layout.activity_user_type_selection)
 
         val userIsLoggedIn =
-            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE).getString("username", "")
+            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                .getBoolean("loggedIn", false)
 
-        if (userIsLoggedIn != "") {
+        if (userIsLoggedIn) {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }

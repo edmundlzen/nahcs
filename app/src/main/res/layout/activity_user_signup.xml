@@ -16,6 +16,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="72dp"
             android:backgroundTint="#007BFF"
+            android:onClick="onClickSignupButton"
             android:text="Create an account"
             android:textAllCaps="false"
             android:textSize="16sp"

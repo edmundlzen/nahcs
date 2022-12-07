@@ -3,10 +3,10 @@ package com.nachs.nutritionandhealthcaremanagementsystem
 import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Paint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class UserLogin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,15 @@ class UserLogin : AppCompatActivity() {
     fun onClickForgotPasswordButton(view: View) {
         val logoView: View = findViewById<View>(R.id.ivLogo)
         val intent: Intent = Intent(this, UserResetPassword::class.java)
-        val options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this, logoView, "logo")
+        val options: ActivityOptions =
+            ActivityOptions.makeSceneTransitionAnimation(this, logoView, "logo")
         startActivity(intent, options.toBundle())
+    }
+
+    fun onClickLoginButton(view: View) {
+        applicationContext.getSharedPreferences("prefs", 0).edit()
+            .putBoolean("loggedIn", true).apply()
+        val intent: Intent = Intent(this, Home::class.java)
+        startActivity(intent)
     }
 }
