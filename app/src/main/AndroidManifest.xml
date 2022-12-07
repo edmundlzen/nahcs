@@ -14,7 +14,7 @@
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
-            android:name=".ActiveAppointmentsReport"
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +29,7 @@
         <activity android:name=".UserOnboard" />
         <activity android:name=".UserLogin" />
         <activity android:name=".UserSignup" />
+        <activity android:name=".UserResetPassword" />
     </application>
 
 </manifest>

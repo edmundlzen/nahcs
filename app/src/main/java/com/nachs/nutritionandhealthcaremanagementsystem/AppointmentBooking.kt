@@ -4,6 +4,8 @@ import DatePickerFragment
 import TimePickerFragment
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -11,6 +13,14 @@ class AppointmentBooking : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_appointment_booking)
+
+        val arraySpinner: Array<String> =
+            arrayOf("Mandy", "John", "Jane", "Mary", "Peter", "Paul", "Ringo", "George")
+        val s: Spinner = findViewById(R.id.spnNutritionist)
+        val adapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arraySpinner)
+        s.adapter = adapter
+
     }
 
     fun onClickSelectDateButton(view: View) {
