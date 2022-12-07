@@ -81,7 +81,7 @@
         android:background="@drawable/jet_black_rounded_background"
         android:elevation="1dp"
         android:ems="10"
-        android:hint="e.g. 160cm"
+        android:hint="e.g. 60kg"
         android:inputType="number"
         android:paddingLeft="12dp"
         android:paddingTop="8dp"
