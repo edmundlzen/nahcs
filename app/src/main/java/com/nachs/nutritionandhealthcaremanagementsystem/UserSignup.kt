@@ -40,9 +40,15 @@ class UserSignup : AppCompatActivity() {
     }
 
     fun onClickSignupButton(view: View) {
-        applicationContext.getSharedPreferences("prefs", 0).edit()
-            .putBoolean("loggedIn", true).apply()
-        val intent: Intent = Intent(this, Home::class.java)
-        startActivity(intent)
+        val builder = CustomDialog(this)
+        builder.setText("Congratulations on successfully creating an account.")
+        builder.setCancellable(false)
+        builder.setCallback {
+            applicationContext.getSharedPreferences("prefs", 0).edit()
+                .putBoolean("loggedIn", true).apply()
+            val intent: Intent = Intent(this, Home::class.java)
+            startActivity(intent)
+        }
+        builder.show()
     }
 }
