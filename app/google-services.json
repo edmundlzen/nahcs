@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "393664561677",
+    "project_id": "nahcs-829fe",
+    "storage_bucket": "nahcs-829fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393664561677:android:db4bbffc39fa90d0878b44",
+        "android_client_info": {
+          "package_name": "com.nachs.nutritionandhealthcaremanagementsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393664561677-bnqtclstsagis7eajf8f65ih2ge6uhgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD27WCAZ3xfPdn1JgaCe8gzrY4ZHl93OLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393664561677-bnqtclstsagis7eajf8f65ih2ge6uhgu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
