@@ -10,15 +10,6 @@ class UserTypeSelection : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_type_selection)
-
-        val userIsLoggedIn =
-            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
-                .getBoolean("loggedIn", false)
-
-        if (userIsLoggedIn) {
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-        }
     }
 
     fun onClickUser(view: View) {
