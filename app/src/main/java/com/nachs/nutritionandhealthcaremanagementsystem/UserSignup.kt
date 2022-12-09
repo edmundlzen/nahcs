@@ -84,6 +84,17 @@ class UserSignup : AppCompatActivity() {
             customDialog.show()
             return
         }
+
+        if (password.length < 6) {
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Password must be at least 6 characters long.")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            return
+        }
         val progressBarDialog = ProgressBarDialog(this)
         progressBarDialog.show()
 
