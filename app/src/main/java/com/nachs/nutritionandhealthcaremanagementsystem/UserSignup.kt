@@ -63,25 +63,25 @@ class UserSignup : AppCompatActivity() {
             password.isEmpty() or
             !tnc.isChecked
         ) {
-            val builder = CustomDialog(this)
-            builder.setText("Please fill all the fields and accept the terms and conditions.")
-            builder.setCancellable(false)
-            builder.setCallback {
-                builder.dismiss()
+            val customDialogBuilder = CustomDialog(this)
+            customDialogBuilder.setText("Please fill all the fields and accept the terms and conditions.")
+            customDialogBuilder.setCancellable(false)
+            customDialogBuilder.setCallback {
+                customDialogBuilder.dismiss()
             }
-            builder.show()
+            customDialogBuilder.show()
             return
         }
 
         // Verify validity of email
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            val builder = CustomDialog(this)
-            builder.setText("Please enter a valid email address.")
-            builder.setCancellable(false)
-            builder.setCallback {
-                builder.dismiss()
+            val customDialogBuilder = CustomDialog(this)
+            customDialogBuilder.setText("Please enter a valid email address.")
+            customDialogBuilder.setCancellable(false)
+            customDialogBuilder.setCallback {
+                customDialogBuilder.dismiss()
             }
-            builder.show()
+            customDialogBuilder.show()
             return
         }
 
@@ -103,32 +103,32 @@ class UserSignup : AppCompatActivity() {
 
                     db.collection("users").document(user!!.uid).set(data)
                         .addOnSuccessListener {
-                            val builder = CustomDialog(this)
-                            builder.setText("Congratulations on successfully creating an account.")
-                            builder.setCancellable(false)
-                            builder.setCallback {
+                            val customDialogBuilder = CustomDialog(this)
+                            customDialogBuilder.setText("Congratulations on successfully creating an account.")
+                            customDialogBuilder.setCancellable(false)
+                            customDialogBuilder.setCallback {
                                 val intent: Intent = Intent(this, Home::class.java)
                                 startActivity(intent)
                             }
-                            builder.show()
+                            customDialogBuilder.show()
                         }
                         .addOnFailureListener {
-                            val builder = CustomDialog(this)
-                            builder.setText("An error occurred. Please try again.")
-                            builder.setCancellable(false)
-                            builder.setCallback {
-                                builder.dismiss()
+                            val customDialogBuilder = CustomDialog(this)
+                            customDialogBuilder.setText("An error occurred. Please try again.")
+                            customDialogBuilder.setCancellable(false)
+                            customDialogBuilder.setCallback {
+                                customDialogBuilder.dismiss()
                             }
-                            builder.show()
+                            customDialogBuilder.show()
                         }
                 } else {
-                    val builder = CustomDialog(this)
-                    builder.setText("An error occurred while creating your account. Please try again.")
-                    builder.setCancellable(false)
-                    builder.setCallback {
-                        builder.dismiss()
+                    val customDialogBuilder = CustomDialog(this)
+                    customDialogBuilder.setText("An error occurred while creating your account. Please try again.")
+                    customDialogBuilder.setCancellable(false)
+                    customDialogBuilder.setCallback {
+                        customDialogBuilder.dismiss()
                     }
-                    builder.show()
+                    customDialogBuilder.show()
                 }
             }
     }
