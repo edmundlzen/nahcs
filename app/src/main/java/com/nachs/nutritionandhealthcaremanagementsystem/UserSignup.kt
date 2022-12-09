@@ -63,27 +63,29 @@ class UserSignup : AppCompatActivity() {
             password.isEmpty() or
             !tnc.isChecked
         ) {
-            val customDialogBuilder = CustomDialog(this)
-            customDialogBuilder.setText("Please fill all the fields and accept the terms and conditions.")
-            customDialogBuilder.setCancellable(false)
-            customDialogBuilder.setCallback {
-                customDialogBuilder.dismiss()
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please fill all the fields and accept the terms and conditions.")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
             }
-            customDialogBuilder.show()
+            customDialog.show()
             return
         }
 
         // Verify validity of email
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            val customDialogBuilder = CustomDialog(this)
-            customDialogBuilder.setText("Please enter a valid email address.")
-            customDialogBuilder.setCancellable(false)
-            customDialogBuilder.setCallback {
-                customDialogBuilder.dismiss()
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please enter a valid email address.")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
             }
-            customDialogBuilder.show()
+            customDialog.show()
             return
         }
+        val progressBarDialog = ProgressBarDialog(this)
+        progressBarDialog.show()
 
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -103,32 +105,35 @@ class UserSignup : AppCompatActivity() {
 
                     db.collection("users").document(user!!.uid).set(data)
                         .addOnSuccessListener {
-                            val customDialogBuilder = CustomDialog(this)
-                            customDialogBuilder.setText("Congratulations on successfully creating an account.")
-                            customDialogBuilder.setCancellable(false)
-                            customDialogBuilder.setCallback {
+                            progressBarDialog.dismiss()
+                            val customDialog = CustomDialog(this)
+                            customDialog.setText("Congratulations on successfully creating an account.")
+                            customDialog.setCancellable(false)
+                            customDialog.setCallback {
                                 val intent: Intent = Intent(this, Home::class.java)
                                 startActivity(intent)
                             }
-                            customDialogBuilder.show()
+                            customDialog.show()
                         }
                         .addOnFailureListener {
-                            val customDialogBuilder = CustomDialog(this)
-                            customDialogBuilder.setText("An error occurred. Please try again.")
-                            customDialogBuilder.setCancellable(false)
-                            customDialogBuilder.setCallback {
-                                customDialogBuilder.dismiss()
+                            progressBarDialog.dismiss()
+                            val customDialog = CustomDialog(this)
+                            customDialog.setText("An error occurred. Please try again.")
+                            customDialog.setCancellable(false)
+                            customDialog.setCallback {
+                                customDialog.dismiss()
                             }
-                            customDialogBuilder.show()
+                            customDialog.show()
                         }
                 } else {
-                    val customDialogBuilder = CustomDialog(this)
-                    customDialogBuilder.setText("An error occurred while creating your account. Please try again.")
-                    customDialogBuilder.setCancellable(false)
-                    customDialogBuilder.setCallback {
-                        customDialogBuilder.dismiss()
+                    progressBarDialog.dismiss()
+                    val customDialog = CustomDialog(this)
+                    customDialog.setText("An error occurred while creating your account. Please try again.")
+                    customDialog.setCancellable(false)
+                    customDialog.setCallback {
+                        customDialog.dismiss()
                     }
-                    customDialogBuilder.show()
+                    customDialog.show()
                 }
             }
     }
