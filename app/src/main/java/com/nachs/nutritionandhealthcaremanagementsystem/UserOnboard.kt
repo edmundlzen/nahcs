@@ -2,9 +2,9 @@ package com.nachs.nutritionandhealthcaremanagementsystem
 
 import android.app.ActivityOptions
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 
 class UserOnboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,10 +12,11 @@ class UserOnboard : AppCompatActivity() {
         setContentView(R.layout.activity_user_onboard)
     }
 
-    fun onClickUserIDSignInButton(view: View) {
+    fun onClickEmailSignInButton(view: View) {
         val logoView: View = findViewById<View>(R.id.ivLogo)
         val intent: Intent = Intent(this, UserLogin::class.java)
-        val options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this, logoView, "logo")
+        val options: ActivityOptions =
+            ActivityOptions.makeSceneTransitionAnimation(this, logoView, "logo")
         startActivity(intent, options.toBundle())
     }
 
