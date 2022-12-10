@@ -4,9 +4,7 @@ import DatePickerFragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class EditUserProfile : AppCompatActivity() {
@@ -19,6 +17,21 @@ class EditUserProfile : AppCompatActivity() {
         val adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arraySpinner)
         s.adapter = adapter
+
+        val bundle = intent.extras
+        val name = bundle?.getString("name")
+        val email = bundle?.getString("email")
+        val phone = bundle?.getString("phone")
+        val birthDate = bundle?.getString("birthDate")
+        val address = bundle?.getString("address")
+        val gender = bundle?.getString("gender")
+
+        findViewById<EditText>(R.id.etName).setText(name)
+        findViewById<EditText>(R.id.etEmail).setText(email)
+        findViewById<EditText>(R.id.etNumber).setText(phone)
+        findViewById<EditText>(R.id.etAddress).setText(address)
+        findViewById<Button>(R.id.btnBirthDate).text = birthDate
+        findViewById<Spinner>(R.id.spnGender).setSelection(if (gender == "Male") 0 else 1)
     }
 
     fun onClickBackButton(view: View) {

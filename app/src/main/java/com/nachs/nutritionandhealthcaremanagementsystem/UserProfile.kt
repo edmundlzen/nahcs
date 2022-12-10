@@ -105,10 +105,55 @@ class UserProfile : AppCompatActivity() {
 
     fun onClickEditButton(view: View) {
         val intent: Intent = Intent(this, EditUserProfile::class.java)
+        val bundle = Bundle()
+        bundle.putString(
+            "name", if (findViewById<TextView>(R.id.tvName).text == "Not Set") {
+                ""
+            } else {
+                findViewById<TextView>(R.id.tvName).text.toString()
+            }
+        )
+        bundle.putString(
+            "email", if (findViewById<TextView>(R.id.tvEmailContent).text == "Not Set") {
+                ""
+            } else {
+                findViewById<TextView>(R.id.tvEmailContent).text.toString()
+            }
+        )
+        bundle.putString(
+            "phone", if (findViewById<TextView>(R.id.tvContactNumber).text == "Not Set") {
+                ""
+            } else {
+                findViewById<TextView>(R.id.tvContactNumber).text.toString()
+            }
+        )
+        bundle.putString(
+            "address", if (findViewById<TextView>(R.id.tvAddressContent).text == "Not Set") {
+                ""
+            } else {
+                findViewById<TextView>(R.id.tvAddressContent).text.toString()
+            }
+        )
+        bundle.putString(
+            "gender", if (findViewById<TextView>(R.id.tvGenderContent).text == "Not Set") {
+                ""
+            } else {
+                findViewById<TextView>(R.id.tvGenderContent).text.toString()
+            }
+        )
+        bundle.putString(
+            "birthDate", if (findViewById<TextView>(R.id.tvDateOfBirthContent).text == "Not Set") {
+                null
+            } else {
+                findViewById<TextView>(R.id.tvDateOfBirthContent).text.toString()
+            }
+        )
+
+        intent.putExtras(bundle)
         startActivity(intent)
     }
 
-    fun getBitmapFromURL(src: String?): Bitmap? {
+    private fun getBitmapFromURL(src: String?): Bitmap? {
         return try {
             val url = URL(src)
             val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
