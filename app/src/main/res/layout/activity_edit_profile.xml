@@ -114,17 +114,6 @@
             app:layout_constraintStart_toStartOf="@+id/btnBirthDate" />
 
         <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Email address"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/etEmail"
-            app:layout_constraintStart_toStartOf="@+id/etEmail" />
-
-        <TextView
             android:id="@+id/tvNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -185,23 +174,6 @@
             app:layout_constraintTop_toBottomOf="@+id/spnGender" />
 
         <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:background="@drawable/platinum_rounded_background"
-            android:ems="10"
-            android:hint="Enter your email address"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="12dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnBirthDate" />
-
-        <EditText
             android:id="@+id/etNumber"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -216,7 +188,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/btnBirthDate" />
 
         <EditText
             android:id="@+id/etAddress"

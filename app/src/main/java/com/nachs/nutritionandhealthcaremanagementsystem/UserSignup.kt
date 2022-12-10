@@ -50,7 +50,7 @@ class UserSignup : AppCompatActivity() {
         val gender = findViewById<Spinner>(R.id.spnGender).selectedItem.toString()
         val birthDate = findViewById<AppCompatButton>(R.id.btnBirthDate).text.toString()
         val email = findViewById<EditText>(R.id.etEmail).text.toString()
-        val number = findViewById<EditText>(R.id.etNumber).text.toString()
+        val phone = findViewById<EditText>(R.id.etNumber).text.toString()
         val password = findViewById<EditText>(R.id.etPassword).text.toString()
         val tnc = findViewById<CheckBox>(R.id.cbTnc)
         val formatter: DateFormat = SimpleDateFormat("dd/MM/yyyy")
@@ -59,7 +59,7 @@ class UserSignup : AppCompatActivity() {
             gender.isEmpty() or
             (formatter.parse(birthDate) == null) or
             email.isEmpty() or
-            number.isEmpty() or
+            phone.isEmpty() or
             password.isEmpty() or
             !tnc.isChecked
         ) {
@@ -111,7 +111,7 @@ class UserSignup : AppCompatActivity() {
                         "gender" to gender,
                         "birthDate" to Timestamp(formatter.parse(birthDate) as Date),
                         "email" to email,
-                        "number" to number,
+                        "phone" to phone,
                         "address" to null,
                         "profilePicture" to null,
                     )
