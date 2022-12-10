@@ -112,6 +112,8 @@ class UserSignup : AppCompatActivity() {
                         "birthDate" to Timestamp(formatter.parse(birthDate) as Date),
                         "email" to email,
                         "number" to number,
+                        "address" to null,
+                        "profilePicture" to null,
                     )
 
                     db.collection("users").document(user!!.uid).set(data)
