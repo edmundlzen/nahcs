@@ -114,6 +114,7 @@ class UserSignup : AppCompatActivity() {
                         "phone" to phone,
                         "address" to null,
                         "profilePicture" to null,
+                        "isNutritionist" to false,
                     )
 
                     db.collection("users").document(user!!.uid).set(data)

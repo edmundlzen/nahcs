@@ -53,9 +53,10 @@ class Home : AppCompatActivity() {
     }
 
     fun onClickSettingsButton(view: View) {
-        val userType =
-            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE).getString("userType", "")
-        val intent: Intent = if (userType == "nutritionist") {
+        val isNutritionist =
+            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                .getBoolean("isNutritionist", false)
+        val intent: Intent = if (isNutritionist) {
             Intent(this, NutritionistSettings::class.java)
         } else {
             Intent(this, MemberSettings::class.java)

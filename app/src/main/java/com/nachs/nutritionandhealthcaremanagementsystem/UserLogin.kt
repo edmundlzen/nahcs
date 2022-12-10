@@ -9,6 +9,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class UserLogin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,10 +54,32 @@ class UserLogin : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    progressBarDialog.dismiss()
-                    val intent: Intent = Intent(this, Home::class.java)
-                    startActivity(intent)
-                    finish()
+                    val db = Firebase.firestore
+                    val auth = Firebase.auth
+                    db.collection("users").document(auth.currentUser!!.uid).get()
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                val isNutritionist = task.result!!.getBoolean("isNutritionist")
+                                val editor =
+                                    applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                                        .edit()
+                                editor.putBoolean("isNutritionist", isNutritionist!!)
+                                editor.apply()
+                                progressBarDialog.dismiss()
+                                val intent: Intent = Intent(this, Home::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                progressBarDialog.dismiss()
+                                val customDialog = CustomDialog(this)
+                                customDialog.setText("An error occurred. Please try again.")
+                                customDialog.setCancellable(false)
+                                customDialog.setCallback {
+                                    customDialog.dismiss()
+                                }
+                                customDialog.show()
+                            }
+                        }
                 } else {
                     progressBarDialog.dismiss()
                     val customDialog = CustomDialog(this)
