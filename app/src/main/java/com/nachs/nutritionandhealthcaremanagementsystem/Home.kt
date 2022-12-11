@@ -4,20 +4,16 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.io.IOException
 import java.io.InputStream
 import java.net.URL
 import java.util.concurrent.Executors
@@ -70,21 +66,20 @@ class Home : AppCompatActivity() {
         return@withContext posts
     }
 
-    fun onClickBMICalculatorButton(view: View) {
-        val intent = Intent(this, BMICalculation::class.java)
+    fun onClickSettingsButton(view: View) {
+        val isNutritionist =
+            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                .getBoolean("isNutritionist", false)
+        val intent: Intent = if (isNutritionist) {
+            Intent(this, NutritionistSettings::class.java)
+        } else {
+            Intent(this, MemberSettings::class.java)
+        }
         startActivity(intent)
     }
 
-    private fun getProfilePicture(url: String): Task<Bitmap?> {
-        return TaskCompletionSource<Bitmap?>().apply {
-            try {
-                val inputStream: InputStream = URL(url).openStream()
-                val bitmap = BitmapFactory.decodeStream(inputStream)
-                setResult(bitmap)
-            } catch (e: IOException) {
-                Log.e("Home", "Error getting profile picture", e)
-                setResult(null)
-            }
-        }.task
+    fun onClickBMICalculatorButton(view: View) {
+        val intent = Intent(this, BMICalculation::class.java)
+        startActivity(intent)
     }
 }
