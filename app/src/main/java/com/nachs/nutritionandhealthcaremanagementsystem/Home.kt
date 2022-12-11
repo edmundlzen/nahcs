@@ -1,71 +1,90 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.TaskCompletionSource
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.io.IOException
+import java.io.InputStream
+import java.net.URL
+import java.util.concurrent.Executors
 
 class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // Generate a lot of fake rows
-        val linearLayout = findViewById<LinearLayout>(R.id.llPosts)
-        val nutritionists = arrayOf(
-            "Sandy",
-            "Tina",
-            "Sally",
-            "Sue",
-            "Samantha",
-            "Sara",
-            "Sasha",
-            "Sandra",
-            "Quinn",
-        )
-        val titles = arrayOf(
-            "How to eat healthy",
-            "How to lose weight",
-            "How to gain weight",
-            "How to cure cancer",
-            "How to cure diabetes",
-            "How to cure heart disease",
-            "How to cure obesity",
-            "How to cure depression",
-            "How to cure anxiety",
-        )
-        for (i in 0..8) {
-            val view =
-                layoutInflater.inflate(R.layout.activity_home, null, false)
-            val nutritionist = view.findViewById<TextView>(R.id.tvNutritionistName1)
-            val title = view.findViewById<TextView>(R.id.tvTitlePost1)
-            val date = view.findViewById<TextView>(R.id.tvDate1)
-            nutritionist.text = nutritionists[i]
-            title.text = titles[i]
-            date.text = "${i + 2} days ago"
+        val progressBarDialog = ProgressBarDialog(this)
+        progressBarDialog.show()
 
-            val post = view.findViewById<LinearLayout>(R.id.llContentPost1)
-            (post.parent as LinearLayout).removeView(post)
-            linearLayout.addView(post)
-        }
+        val executor = Executors.newSingleThreadExecutor()
+        executor.submit(Runnable {
+            lifecycleScope.launch {
+                val posts = getPosts()
+                runOnUiThread {
+                    val recyclerView: RecyclerView = findViewById(R.id.rvPosts)
+                    recyclerView.adapter = PostsAdapter(posts)
+                    progressBarDialog.dismiss()
+                }
+            }
+        })
     }
 
-    fun onClickSettingsButton(view: View) {
-        val isNutritionist =
-            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
-                .getBoolean("isNutritionist", false)
-        val intent: Intent = if (isNutritionist) {
-            Intent(this, NutritionistSettings::class.java)
-        } else {
-            Intent(this, MemberSettings::class.java)
+    private suspend fun getPosts(): ArrayList<Post> = withContext(Dispatchers.Default) {
+        val db = Firebase.firestore
+        val postsRef = db.collection("posts")
+        val posts = ArrayList<Post>()
+        val postsData = postsRef.get().await()
+        for (post in postsData) {
+            val userId = post.getString("postedBy")!!
+            val user = db.collection("users").document(userId).get().await()
+            val userProfilePicture: Bitmap? = if (user.getString("profilePicture") != null) {
+                val url = URL(user.getString("profilePicture"))
+                val inputStream: InputStream = url.openConnection().getInputStream()
+                BitmapFactory.decodeStream(inputStream)
+            } else {
+                null
+            }
+            val post = Post(
+                post.getString("title")!!,
+                post.getString("content")!!,
+                user.getString("name")!!,
+                userProfilePicture,
+                post.getDate("postedAt")!!
+            )
+            posts.add(post)
         }
-        startActivity(intent)
+        return@withContext posts
     }
 
     fun onClickBMICalculatorButton(view: View) {
         val intent = Intent(this, BMICalculation::class.java)
         startActivity(intent)
+    }
+
+    private fun getProfilePicture(url: String): Task<Bitmap?> {
+        return TaskCompletionSource<Bitmap?>().apply {
+            try {
+                val inputStream: InputStream = URL(url).openStream()
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                setResult(bitmap)
+            } catch (e: IOException) {
+                Log.e("Home", "Error getting profile picture", e)
+                setResult(null)
+            }
+        }.task
     }
 }

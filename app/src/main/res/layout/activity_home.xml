@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginVertical="16dp"
@@ -93,81 +93,61 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!--Content Post-->
             <LinearLayout
-                android:id="@+id/llContentPost1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@color/white"
+                android:clickable="true"
                 android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="onClickBMICalculatorButton"
                 android:orientation="vertical"
                 android:padding="16dp"
                 app:cornerRadius="16dp">
 
-                <TextView
-                    android:id="@+id/tvTitlePost1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="How do I lose weight?"
-                    android:textColor="#000000"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/ivProfilePicture"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/profile_pic_test"
-                        app:shapeAppearance="@style/ShapeAppearance.App.CircleImageView" />
+                        android:src="@drawable/appointment" />
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Make an Appointment"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tvNutritionistName1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Posted by Nutritionist Name"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:textStyle="italic" />
-
-                        <TextView
-                            android:id="@+id/tvDate1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="1 day ago"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:textStyle="italic" />
-                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Make an appointment with a professional nutritionist."
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvContentPost1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/long_lorem_ipsum"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPosts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
