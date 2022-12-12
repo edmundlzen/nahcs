@@ -8,19 +8,29 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AppointmentBooking : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_appointment_booking)
+        val progressBarDialog = ProgressBarDialog(this)
+        progressBarDialog.show()
+        val db = Firebase.firestore
+        val nutritionistsRef = db.collection("users").whereEqualTo("isNutritionist", true)
+        nutritionistsRef.get().addOnSuccessListener { documents ->
+            val nutritionists = ArrayList<String>()
+            for (document in documents) {
+                nutritionists.add(document.data["name"].toString())
+            }
 
-        val arraySpinner: Array<String> =
-            arrayOf("Mandy", "John", "Jane", "Mary", "Peter", "Paul", "Ringo", "George")
-        val s: Spinner = findViewById(R.id.spnNutritionist)
-        val adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arraySpinner)
-        s.adapter = adapter
-
+            val s: Spinner = findViewById(R.id.spnNutritionist)
+            val adapter =
+                ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, nutritionists)
+            s.adapter = adapter
+            progressBarDialog.dismiss()
+        }
     }
 
     fun onClickSelectDateButton(view: View) {

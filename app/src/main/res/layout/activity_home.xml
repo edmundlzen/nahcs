@@ -102,7 +102,7 @@
                 android:elevation="6dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="onClickBMICalculatorButton"
+                android:onClick="onClickMakeAppointment"
                 android:orientation="vertical"
                 android:padding="16dp"
                 app:cornerRadius="16dp">

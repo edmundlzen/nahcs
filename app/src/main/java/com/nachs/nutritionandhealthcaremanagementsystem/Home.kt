@@ -82,4 +82,9 @@ class Home : AppCompatActivity() {
         val intent = Intent(this, BMICalculation::class.java)
         startActivity(intent)
     }
+
+    fun onClickMakeAppointment(view: View) {
+        val intent = Intent(this, AppointmentBooking::class.java)
+        startActivity(intent)
+    }
 }
