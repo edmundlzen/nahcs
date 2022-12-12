@@ -11,11 +11,18 @@ class MemberSettings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_member_settings)
+
+        val notificationsOn =
+            applicationContext.getSharedPreferences("prefs", 0).getBoolean("notificationsOn", true)
+        val switch: SwitchCompat = findViewById(R.id.switchNotifications)
+        switch.isChecked = notificationsOn
     }
 
     fun onClickNotifications(view: View) {
         val switch: SwitchCompat = findViewById(R.id.switchNotifications)
         switch.isChecked = !switch.isChecked
+        applicationContext.getSharedPreferences("prefs", 0).edit()
+            .putBoolean("notificationsOn", switch.isChecked).apply()
     }
 
     fun onClickBackButton(view: View) {
