@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.nachs.nutritionandhealthcaremanagementsystem'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.nachs.nutritionandhealthcaremanagementsystem"
@@ -62,4 +62,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    implementation("com.vanniktech:android-image-cropper:4.5.0")
 }

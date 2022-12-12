@@ -120,6 +120,11 @@ class UserSignup : AppCompatActivity() {
                     db.collection("users").document(user!!.uid).set(data)
                         .addOnSuccessListener {
                             progressBarDialog.dismiss()
+                            val editor =
+                                applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                                    .edit()
+                            editor.putBoolean("isNutritionist", false)
+                            editor.apply()
                             val customDialog = CustomDialog(this)
                             customDialog.setText("Congratulations on successfully creating an account.")
                             customDialog.setCancellable(false)
