@@ -70,9 +70,4 @@ class NutritionistSettings : AppCompatActivity() {
         val intent: Intent = Intent(this, NutritionistContentPosting::class.java)
         startActivity(intent)
     }
-
-    fun onClickEditPost(view: View) {
-        val intent: Intent = Intent(this, NutritionistContentEditing::class.java)
-        startActivity(intent)
-    }
 }

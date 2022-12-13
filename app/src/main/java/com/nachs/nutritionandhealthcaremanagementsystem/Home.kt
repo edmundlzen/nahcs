@@ -23,6 +23,14 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        val isNutritionist =
+            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                .getBoolean("isNutritionist", false)
+
+        if (isNutritionist) {
+            findViewById<View>(R.id.llMakeAppointment).visibility = View.GONE
+        }
+
         val progressBarDialog = ProgressBarDialog(this)
         progressBarDialog.show()
 
