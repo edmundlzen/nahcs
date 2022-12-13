@@ -87,19 +87,17 @@
         android:text="Time"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnTime"
-        app:layout_constraintStart_toStartOf="@+id/btnTime" />
+        app:layout_constraintBottom_toTopOf="@+id/spnTime"
+        app:layout_constraintStart_toStartOf="@+id/spnTime" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnTime"
+    <Spinner
+        android:id="@+id/spnTime"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="52dp"
         android:background="@drawable/platinum_rounded_background"
         android:elevation="1dp"
-        android:onClick="onClickSelectTimeButton"
-        android:text="Select a time"
-        android:textAllCaps="false"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDate" />
@@ -125,6 +123,7 @@
         android:layout_height="60dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="#00b52a"
+        android:onClick="onClickConfirmButton"
         android:text="Confirm"
         android:textAllCaps="false"
         android:textSize="16sp"
