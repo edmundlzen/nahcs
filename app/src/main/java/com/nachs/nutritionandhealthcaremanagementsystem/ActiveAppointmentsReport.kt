@@ -1,7 +1,6 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
 import DatePickerFragment
-import TimePickerFragment
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -15,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.util.*
 import java.util.concurrent.Executors
 
 class ActiveAppointmentsReport : AppCompatActivity() {
@@ -55,6 +55,17 @@ class ActiveAppointmentsReport : AppCompatActivity() {
             val activeAppointments = ArrayList<ActiveAppointment>()
             val appointmentsData = appointmentsRef.get().await()
             for (appointment in appointmentsData) {
+                // Check if the date and time is in the past
+                val calendar = Calendar.getInstance()
+                calendar.time = appointment.getDate("date")!!
+                calendar.set(
+                    Calendar.HOUR_OF_DAY,
+                    appointment.getString("time")!!.split(":")[0].toInt()
+                )
+                val selectedDateTime = calendar.time
+                if (selectedDateTime.before(Date())) {
+                    continue
+                }
                 val nutritionistId = appointment.getString("nutritionist")!!
                 val nutritionist = db.collection("users").document(nutritionistId).get().await()
                 val nutritionistName = nutritionist.getString("name")!!
@@ -87,16 +98,6 @@ class ActiveAppointmentsReport : AppCompatActivity() {
             val date = bundle.getString("date")
             val textView: TextView = findViewById(R.id.btnDate)
             textView.text = date
-        }
-    }
-
-    fun onClickSelectTimeButton(view: View) {
-        val timePickerFragment = TimePickerFragment()
-        timePickerFragment.show(supportFragmentManager, "timePicker")
-        supportFragmentManager.setFragmentResultListener("timePicker", this) { key, bundle ->
-            val time = bundle.getString("time")
-            val textView: TextView = findViewById(R.id.btnTime)
-            textView.text = time
         }
     }
 

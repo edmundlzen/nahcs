@@ -9,5 +9,6 @@ data class ActiveAppointment(
     val nutritionistName: String,
     val nutritionistId: String,
     val userName: String,
-    val userId: String
+    val userId: String,
+    val isHistory: Boolean = false
 )

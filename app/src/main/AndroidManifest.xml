@@ -43,7 +43,7 @@
         <activity android:name=".UserProfile" />
         <activity android:name=".NutritionistContentPosting" />
         <activity android:name=".AppointmentBooking" />
-        <activity android:name=".EditAppointment" />
+        <activity android:name=".AppointmentEditing" />
         <activity android:name=".ActiveAppointmentsReport" />
         <activity android:name=".AppointmentsHistoryReport" />
         <activity android:name=".EditUserProfile" />

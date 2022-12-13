@@ -54,10 +54,10 @@
         android:textSize="16sp" />
 
     <ImageButton
-        android:id="@+id/ibCancelAppointment"
+        android:id="@+id/ibEditAppointment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_baseline_delete_24" />
+        android:src="@drawable/ic_baseline_edit_24" />
 </LinearLayout>

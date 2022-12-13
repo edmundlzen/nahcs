@@ -1,14 +1,13 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 
 class ActiveAppointmentsAdapter(private val activeAppointments: ArrayList<ActiveAppointment>) :
@@ -36,23 +35,22 @@ class ActiveAppointmentsAdapter(private val activeAppointments: ArrayList<Active
         } else {
             currentItem.nutritionistName
         }
-        holder.activeAppointmentDeleteButton.setOnClickListener {
-            val customDialog = CustomDialog(it.context)
-            customDialog.setText("Are you sure you want to delete this appointment?")
-            customDialog.setCallback {
-                val progressBarDialog = ProgressBarDialog(it.context)
-                progressBarDialog.show()
+        if (currentItem.isHistory) {
+            holder.activeAppointmentEditButton.visibility = View.GONE
+            return
+        }
+        holder.activeAppointmentEditButton.setOnClickListener {
+            val intent = Intent(
+                holder.activeAppointmentNutritionistName.context,
+                AppointmentEditing::class.java
+            )
+            intent.putExtra("appointmentId", currentItem.id)
+            intent.putExtra("nutritionistId", currentItem.nutritionistId)
+            intent.putExtra("nutritionistName", currentItem.nutritionistName)
+            intent.putExtra("date", currentItem.date.time)
+            intent.putExtra("time", currentItem.time)
 
-                val db = Firebase.firestore
-                db.collection("appointments").document(currentItem.id).delete()
-                    .addOnSuccessListener {
-                        activeAppointments.removeAt(position)
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position, activeAppointments.size)
-                        progressBarDialog.dismiss()
-                    }
-            }
-            customDialog.show()
+            holder.activeAppointmentNutritionistName.context.startActivity(intent)
         }
     }
 
@@ -65,7 +63,7 @@ class ActiveAppointmentsAdapter(private val activeAppointments: ArrayList<Active
         val activeAppointmentTime = itemView.findViewById<TextView>(R.id.tvAppointmentTime)
         val activeAppointmentNutritionistName =
             itemView.findViewById<TextView>(R.id.tvNutritionistName)
-        val activeAppointmentDeleteButton =
-            itemView.findViewById<ImageButton>(R.id.ibCancelAppointment)
+        val activeAppointmentEditButton =
+            itemView.findViewById<ImageButton>(R.id.ibEditAppointment)
     }
 }
