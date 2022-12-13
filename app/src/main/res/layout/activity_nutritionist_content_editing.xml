@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NutritionistContentPosting">
+    tools:context=".NutritionistContentEditing">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="26dp"
-            android:text="What to post"
+            android:text="Edit this post"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -112,18 +112,18 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:cornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@id/btnPost"
+            app:layout_constraintEnd_toStartOf="@id/btnSave"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPostContent" />
 
         <Button
-            android:id="@+id/btnPost"
+            android:id="@+id/btnSave"
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
             android:backgroundTint="#00b52a"
-            android:onClick="onPostButtonClicked"
-            android:text="Post"
+            android:onClick="onSaveButtonClicked"
+            android:text="Save"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textStyle="bold"

@@ -55,6 +55,7 @@ class Home : AppCompatActivity() {
                 null
             }
             val post = Post(
+                post.id,
                 post.getString("title")!!,
                 post.getString("content")!!,
                 user.getString("name")!!,

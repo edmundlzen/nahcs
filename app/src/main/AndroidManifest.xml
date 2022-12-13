@@ -47,6 +47,7 @@
         <activity android:name=".ActiveAppointmentsReport" />
         <activity android:name=".AppointmentsHistoryReport" />
         <activity android:name=".EditUserProfile" />
+        <activity android:name=".NutritionistContentEditing" />
 
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
