@@ -62,16 +62,19 @@ class PostsAdapter(private val posts: ArrayList<Post>) :
                     val db = Firebase.firestore
                     val postsRef = db.collection("posts")
                     postsRef.document(currentItem.id).delete()
-                    progressBarDialog.dismiss()
-                    val customDialog = CustomDialog(holder.deleteButton.context)
-                    customDialog.setText("Post successfully deleted")
-                    customDialog.setCallback {
-                        val intent = Intent(holder.deleteButton.context, Home::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        holder.deleteButton.context.startActivity(intent)
-                    }
-                    customDialog.setCancellable(false)
-                    customDialog.show()
+                        .addOnSuccessListener {
+                            posts.removeAt(position)
+                            notifyItemRemoved(position)
+                            notifyItemRangeChanged(position, posts.size)
+                            progressBarDialog.dismiss()
+                        }
+                        .addOnFailureListener {
+                            progressBarDialog.dismiss()
+                            val customDialog = CustomDialog(holder.deleteButton.context)
+                            customDialog.setText("Something went wrong. Please try again later.")
+                            customDialog.setCancellable(false)
+                            customDialog.show()
+                        }
                 }
                 customDialog.show()
             })
