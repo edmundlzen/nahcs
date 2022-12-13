@@ -91,6 +91,7 @@ class AppointmentEditing : AppCompatActivity() {
                     findViewById<TextView>(R.id.btnDate).text =
                         SimpleDateFormat("dd/MM/yyyy").format(Date(date))
                     findViewById<Spinner>(R.id.spnTime).setSelection(bookingSlots.indexOf(time))
+                    selectedDate = Date(date)
                     progressBarDialog.dismiss()
                 }
             }
@@ -134,6 +135,7 @@ class AppointmentEditing : AppCompatActivity() {
                 findViewById<TextView>(R.id.btnDate).text =
                     SimpleDateFormat("dd/MM/yyyy").format(Date(date))
                 findViewById<Spinner>(R.id.spnTime).setSelection(bookingSlots.indexOf(time))
+                selectedDate = Date(date)
                 progressBarDialog.dismiss()
             }
         }
@@ -215,7 +217,9 @@ class AppointmentEditing : AppCompatActivity() {
                         customDialog.setText("Appointment booked successfully!")
                         customDialog.setCancellable(false)
                         customDialog.setCallback {
-                            onBackPressed()
+                            val intent = Intent(this, ActiveAppointmentsReport::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            startActivity(intent)
                         }
                         customDialog.show()
                     }
@@ -230,10 +234,10 @@ class AppointmentEditing : AppCompatActivity() {
     }
 
     fun onClickDelete(view: View) {
-        val customDialog = CustomDialog(view.context)
+        val customDialog = CustomDialog(applicationContext)
         customDialog.setText("Are you sure you want to delete this appointment?")
         customDialog.setCallback {
-            val progressBarDialog = ProgressBarDialog(view.context)
+            val progressBarDialog = ProgressBarDialog(applicationContext)
             progressBarDialog.show()
 
             val db = Firebase.firestore
