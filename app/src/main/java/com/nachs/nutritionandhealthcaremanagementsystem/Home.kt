@@ -63,6 +63,8 @@ class Home : AppCompatActivity() {
             )
             posts.add(post)
         }
+        // Sort posts by date
+        posts.sortByDescending { it.postedAt }
         return@withContext posts
     }
 

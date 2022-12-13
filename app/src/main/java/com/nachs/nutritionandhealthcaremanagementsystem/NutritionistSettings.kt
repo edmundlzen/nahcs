@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 class NutritionistSettings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_member_settings)
+        setContentView(R.layout.activity_nutritionist_settings)
 
         val notificationsOn =
             applicationContext.getSharedPreferences("prefs", 0).getBoolean("notificationsOn", true)
@@ -64,5 +64,14 @@ class NutritionistSettings : AppCompatActivity() {
         builder.setText("This app is developed by __ and __ for the health and wellness of the people.")
         builder.setCancellable(false)
         builder.show()
+    }
+
+    fun onClickCreatePost(view: View) {
+        val intent: Intent = Intent(this, NutritionistContentPosting::class.java)
+        startActivity(intent)
+    }
+
+    fun onClickEditPost(view: View) {
+        val intent: Intent = Intent(this, NutritionistContentEditing::class.java)
     }
 }

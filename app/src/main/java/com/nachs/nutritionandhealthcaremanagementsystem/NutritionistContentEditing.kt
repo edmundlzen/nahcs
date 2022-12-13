@@ -1,20 +1,18 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
-class NutritionistContentPosting : AppCompatActivity() {
+class NutritionistContentEditing : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nutritionist_content_posting)
+        setContentView(R.layout.activity_nutritionist_content_editing)
     }
 
     fun onClickBackButton(view: View) {
@@ -40,7 +38,7 @@ class NutritionistContentPosting : AppCompatActivity() {
             hashMapOf(
                 "title" to postTitle.toString(),
                 "content" to postContent.toString(),
-                "postedAt" to Timestamp(Date()),
+                "postedAt" to Date().time,
                 "postedBy" to auth.currentUser?.uid
             )
         )
@@ -48,11 +46,7 @@ class NutritionistContentPosting : AppCompatActivity() {
         val customDialog = CustomDialog(this)
         customDialog.setText("Post successfully added")
         customDialog.setCallback {
-            val intent = Intent(this, Home::class.java)
-            val bundle = Bundle()
-            intent.putExtras(bundle)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+            onBackPressed()
         }
         customDialog.setCancellable(false)
         customDialog.show()
