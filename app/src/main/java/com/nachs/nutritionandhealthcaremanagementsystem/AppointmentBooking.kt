@@ -1,6 +1,7 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
 import DatePickerFragment
+import android.app.AlarmManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -130,6 +131,24 @@ class AppointmentBooking : AppCompatActivity() {
                         "user" to auth.currentUser?.uid
                     )
                     appointmentsRef.add(appointment).addOnSuccessListener {
+                        // Create a notification for the user an hour before the appointment
+                        val am = getSystemService(ALARM_SERVICE) as AlarmManager
+                        val notificationReceiver = NotificationReceiver()
+                        am.setWindow(
+                            AlarmManager.RTC_WAKEUP,
+                            selectedDateTime.time - 1000 * 60 * 60,
+                            1000 * 60 * 10,
+                            notificationReceiver.getPendingIntent(
+                                this,
+                                Random().nextInt(),
+                                "Appointment Reminder",
+                                "You have an appointment with ${findViewById<Spinner>(R.id.spnNutritionist).selectedItem} at ${
+                                    findViewById<Spinner>(
+                                        R.id.spnTime
+                                    ).selectedItem
+                                } on ${SimpleDateFormat("dd/MM/yyyy").format(selectedDate)}"
+                            )
+                        )
                         progressBarDialog.dismiss()
                         val customDialog = CustomDialog(this)
                         customDialog.setText("Appointment booked successfully!")
