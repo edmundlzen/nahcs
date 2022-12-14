@@ -94,6 +94,55 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llCaloriesCalculator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="onClickCaloriesCalculator"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:cornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/calories_calculator" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Calories Calculator"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Estimate the number of calories a person needs to consume each day to lose weight."
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/llMakeAppointment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

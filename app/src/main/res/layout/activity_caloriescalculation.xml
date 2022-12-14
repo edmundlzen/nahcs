@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".CaloriesCalculation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp">
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClickBackButton"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Calories Calculation"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ibBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Age (15-80)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/etAge"
+            app:layout_constraintStart_toStartOf="@+id/etAge" />
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/jet_black_rounded_background"
+            android:elevation="1dp"
+            android:ems="10"
+            android:hint="e.g. 23"
+            android:inputType="number"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E2E2E2"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Height (cm)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/etHeight"
+            app:layout_constraintStart_toStartOf="@+id/etHeight" />
+
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/jet_black_rounded_background"
+            android:elevation="1dp"
+            android:ems="10"
+            android:hint="e.g. 170cm"
+            android:inputType="number"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E2E2E2"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etAge" />
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Weight (kg)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/etWeight"
+            app:layout_constraintStart_toStartOf="@+id/etWeight" />
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/jet_black_rounded_background"
+            android:elevation="1dp"
+            android:ems="10"
+            android:hint="e.g. 60kg"
+            android:inputType="number"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E2E2E2"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etHeight" />
+
+        <TextView
+            android:id="@+id/tvGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Gender"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/spnGender"
+            app:layout_constraintStart_toStartOf="@+id/spnGender" />
+
+        <Spinner
+            android:id="@+id/spnGender"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/jet_black_rounded_background"
+            android:elevation="1dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etWeight" />
+
+        <TextView
+            android:id="@+id/tvActivityLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Activity Level"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/spnActivityLevel"
+            app:layout_constraintStart_toStartOf="@+id/spnActivityLevel" />
+
+        <Spinner
+            android:id="@+id/spnActivityLevel"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/jet_black_rounded_background"
+            android:elevation="1dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnGender" />
+
+        <TextView
+            android:id="@+id/tvMaintainWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Maintain Weight"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/rlMaintainWeight"
+            app:layout_constraintStart_toStartOf="@+id/rlMaintainWeight" />
+
+        <RelativeLayout
+            android:id="@+id/rlMaintainWeight"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spnActivityLevel">
+
+            <EditText
+                android:id="@+id/etMaintainWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:lines="1"
+                android:paddingRight="60dp" />
+
+            <TextView
+                android:id="@+id/tvMaintainWeightHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="Calories/day"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvMildWeightLoss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Mild Weight Loss (0.25kg/week)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/rlMildWeightLoss"
+            app:layout_constraintStart_toStartOf="@+id/rlMildWeightLoss" />
+
+        <RelativeLayout
+            android:id="@+id/rlMildWeightLoss"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rlMaintainWeight">
+
+            <EditText
+                android:id="@+id/etMildWeightLoss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:lines="1"
+                android:paddingRight="60dp" />
+
+            <TextView
+                android:id="@+id/tvMildWeightLossHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="Calories/day"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvModerateWeightLoss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Moderate Weight Loss (0.5kg/week)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/rlModerateWeightLoss"
+            app:layout_constraintStart_toStartOf="@+id/rlModerateWeightLoss" />
+
+        <RelativeLayout
+            android:id="@+id/rlModerateWeightLoss"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rlMildWeightLoss">
+
+            <EditText
+                android:id="@+id/etModerateWeightLoss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:lines="1"
+                android:paddingRight="60dp" />
+
+            <TextView
+                android:id="@+id/tvModerateWeightLossHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="Calories/day"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvExtremeWeightLoss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Extreme Weight Loss (1kg/week)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/rlExtremeWeightLoss"
+            app:layout_constraintStart_toStartOf="@+id/rlExtremeWeightLoss" />
+
+        <RelativeLayout
+            android:id="@+id/rlExtremeWeightLoss"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rlModerateWeightLoss">
+
+            <EditText
+                android:id="@+id/etExtremeWeightLoss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:lines="1"
+                android:paddingRight="60dp" />
+
+            <TextView
+                android:id="@+id/tvExtremeWeightLossHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="Calories/day"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnCalculate"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#009d00"
+            android:onClick="onClickCalculateButton"
+            android:text="Calculate"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlExtremeWeightLoss" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#FF003D"
+            android:onClick="onClickResetButton"
+            android:text="Reset"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCalculate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -98,4 +98,9 @@ class Home : AppCompatActivity() {
         val intent = Intent(this, AppointmentBooking::class.java)
         startActivity(intent)
     }
+
+    fun onClickCaloriesCalculator(view: View) {
+        val intent = Intent(this, CaloriesCalculation::class.java)
+        startActivity(intent)
+    }
 }
