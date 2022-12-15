@@ -22,8 +22,16 @@ class AppointmentsHistoryReport : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_active_appointments_report)
 
+        val isNutritionist =
+            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                .getBoolean("isNutritionist", false)
+
         findViewById<TextView>(R.id.tvActions).visibility = View.GONE
         findViewById<TextView>(R.id.tvTitle).text = "Appointments History"
+
+        if (isNutritionist) {
+            findViewById<TextView>(R.id.tvNutritionistName).text = "Patient"
+        }
 
         val progressBarDialog = ProgressBarDialog(this)
         progressBarDialog.show()

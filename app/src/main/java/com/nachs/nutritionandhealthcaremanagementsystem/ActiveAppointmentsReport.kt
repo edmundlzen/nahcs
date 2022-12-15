@@ -21,6 +21,13 @@ class ActiveAppointmentsReport : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_active_appointments_report)
+        val isNutritionist =
+            applicationContext.getSharedPreferences("prefs", MODE_PRIVATE)
+                .getBoolean("isNutritionist", false)
+
+        if (isNutritionist) {
+            findViewById<TextView>(R.id.tvNutritionistName).text = "Patient"
+        }
 
         val progressBarDialog = ProgressBarDialog(this)
         progressBarDialog.show()
