@@ -3,10 +3,12 @@ package com.nachs.nutritionandhealthcaremanagementsystem
 import DatePickerFragment
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -25,6 +27,40 @@ class UserSignup : AppCompatActivity() {
         val adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arraySpinner)
         s.adapter = adapter
+
+        val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
+        etPassword.addTextChangedListener(AddListenerOnPasswordChange(etPassword))
+    }
+
+    class AddListenerOnPasswordChange(private val etPassword: TextInputEditText) :
+        TextWatcher {
+        override fun afterTextChanged(s: android.text.Editable?) {
+            val password = etPassword.text.toString()
+
+            if (password.isBlank()) {
+                etPassword.setBackgroundResource(R.drawable.platinum_rounded_background)
+            } else if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$"))) {
+                etPassword.setBackgroundResource(R.drawable.platinum_rounded_background_red_edge)
+            } else {
+                etPassword.setBackgroundResource(R.drawable.platinum_rounded_background_green_edge)
+            }
+        }
+
+        override fun beforeTextChanged(
+            s: CharSequence?,
+            start: Int,
+            count: Int,
+            after: Int
+        ) {
+        }
+
+        override fun onTextChanged(
+            s: CharSequence?,
+            start: Int,
+            before: Int,
+            count: Int
+        ) {
+        }
     }
 
     fun onClickBackButton(view: View) {

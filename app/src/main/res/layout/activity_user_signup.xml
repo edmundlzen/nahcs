@@ -125,6 +125,20 @@
             app:layout_constraintStart_toStartOf="@+id/tilPassword" />
 
         <TextView
+            android:id="@+id/tvPasswordSuggestion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:lines="2"
+            android:text="At least 8 characters, 1 number, 1 uppercase, 1 lowercase"
+            android:textColor="#000000"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvPassword"
+            app:layout_constraintEnd_toEndOf="@id/tilPassword"
+            app:layout_constraintStart_toEndOf="@+id/tvPassword" />
+
+
+        <TextView
             android:id="@+id/tvGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
