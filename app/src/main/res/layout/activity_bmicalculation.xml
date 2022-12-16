@@ -1,180 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".BMICalculation">
 
-    <ImageButton
-        android:id="@+id/ibBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:onClick="onClickBackButton"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="BMI Calculation"
-        android:textColor="#000000"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ibBack"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvHeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Height (cm)"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/etHeight"
-        app:layout_constraintStart_toStartOf="@+id/etHeight" />
-
-    <EditText
-        android:id="@+id/etHeight"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/jet_black_rounded_background"
-        android:elevation="1dp"
-        android:ems="10"
-        android:hint="e.g. 160cm"
-        android:inputType="number"
-        android:paddingLeft="12dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#E2E2E2"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:id="@+id/tvWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Weight (kg)"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/etWeight"
-        app:layout_constraintStart_toStartOf="@+id/etWeight" />
-
-    <EditText
-        android:id="@+id/etWeight"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/jet_black_rounded_background"
-        android:elevation="1dp"
-        android:ems="10"
-        android:hint="e.g. 60kg"
-        android:inputType="number"
-        android:paddingLeft="12dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#E2E2E2"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etHeight"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:id="@+id/tvBMI"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Your BMI is:"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/rlBMI"
-        app:layout_constraintStart_toStartOf="@+id/rlBMI" />
-
-    <RelativeLayout
-        android:id="@+id/rlBMI"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etWeight"
-        app:layout_constraintVertical_bias="0.2">
-
-        <EditText
-            android:id="@+id/etBMI"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:lines="1"
-            android:paddingRight="60dp" />
-
-        <TextView
-            android:id="@+id/tvBMIHint"
+        <ImageButton
+            android:id="@+id/ibBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:text="BMI %"
-            android:textColor="#808080"
-            android:textSize="18sp" />
-    </RelativeLayout>
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onClickBackButton"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnCalculate"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#009d00"
-        android:onClick="onClickCalculateButton"
-        android:text="Calculate"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:cornerRadius="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnReset"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="BMI Calculation"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ibBack"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="#FF003D"
-        android:onClick="onClickResetButton"
-        android:text="Reset"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:cornerRadius="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/tvHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Height (cm)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/etHeight"
+            app:layout_constraintStart_toStartOf="@+id/etHeight" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jet_black_rounded_background"
+            android:elevation="1dp"
+            android:ems="10"
+            android:hint="e.g. 160cm"
+            android:inputType="number"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E2E2E2"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Weight (kg)"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/etWeight"
+            app:layout_constraintStart_toStartOf="@+id/etWeight" />
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/jet_black_rounded_background"
+            android:elevation="1dp"
+            android:ems="10"
+            android:hint="e.g. 60kg"
+            android:inputType="number"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E2E2E2"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etHeight" />
+
+        <TextView
+            android:id="@+id/tvBMI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Your BMI is:"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/rlBMI"
+            app:layout_constraintStart_toStartOf="@+id/rlBMI" />
+
+        <RelativeLayout
+            android:id="@+id/rlBMI"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etWeight">
+
+            <EditText
+                android:id="@+id/etBMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:lines="1"
+                android:paddingRight="60dp" />
+
+            <TextView
+                android:id="@+id/tvBMIHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="BMI %"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvAdvice"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Advice"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlBMI" />
+
+        <Button
+            android:id="@+id/btnCalculate"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#009d00"
+            android:onClick="onClickCalculateButton"
+            android:text="Calculate"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAdvice" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="#FF003D"
+            android:onClick="onClickResetButton"
+            android:text="Reset"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnCalculate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

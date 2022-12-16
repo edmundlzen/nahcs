@@ -79,6 +79,39 @@ class EditUserProfile : AppCompatActivity() {
             return
         }
 
+        if (phone.length > 11 || phone.length < 10) {
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please enter a valid phone number")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            return
+        }
+
+        if (birthDate.after(SimpleDateFormat("dd/MM/yyyy").parse("01/01/2007"))) {
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please enter a valid birth date before 2007")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            return
+        }
+
+        if (!name.matches(Regex("[a-zA-Z ]+"))) {
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please enter a valid name without numbers")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            return
+        }
+
         val progressBarDialog = ProgressBarDialog(this)
         progressBarDialog.show()
 

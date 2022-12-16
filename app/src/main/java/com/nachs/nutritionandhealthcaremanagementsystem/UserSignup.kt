@@ -85,9 +85,43 @@ class UserSignup : AppCompatActivity() {
             return
         }
 
-        if (password.length < 6) {
+        // Check if password is at least 8 characters long, contains at least one uppercase letter, one lowercase letter and one digit
+        if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$"))) {
             val customDialog = CustomDialog(this)
-            customDialog.setText("Password must be at least 6 characters long.")
+            customDialog.setText("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one digit.")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            return
+        }
+
+        if (phone.length > 11 || phone.length < 10) {
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please enter a valid phone number")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            return
+        }
+
+        if (formatter.parse(birthDate).after(SimpleDateFormat("dd/MM/yyyy").parse("01/01/2007"))) {
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please enter a valid birth date before 2007")
+            customDialog.setCancellable(false)
+            customDialog.setCallback {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            return
+        }
+
+        if (!name.matches(Regex("[a-zA-Z ]+"))) {
+            val customDialog = CustomDialog(this)
+            customDialog.setText("Please enter a valid name without numbers")
             customDialog.setCancellable(false)
             customDialog.setCallback {
                 customDialog.dismiss()

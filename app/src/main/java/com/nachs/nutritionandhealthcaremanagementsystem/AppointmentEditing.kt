@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -46,57 +45,57 @@ class AppointmentEditing : AppCompatActivity() {
                 .getBoolean("isNutritionist", false)
 
         if (isNutritionist) {
-            // Disable all fields
-            findViewById<Spinner>(R.id.spnTime).isEnabled = false
-            findViewById<Spinner>(R.id.spnNutritionist).isEnabled = false
-            findViewById<Button>(R.id.btnDate).isEnabled = false
-            findViewById<Button>(R.id.btnPost).isEnabled = false
-            val customDialog = CustomDialog(this)
-            customDialog.setText("Nutritionists can only delete appointments.")
-            customDialog.setCallback {
-                val spnTime: Spinner = findViewById(R.id.spnTime)
-                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, bookingSlots)
-                spnTime.adapter = adapter
-                val progressBarDialog = ProgressBarDialog(this)
-                progressBarDialog.show()
-                val db = Firebase.firestore
-                val nutritionistsRef = db.collection("users").whereEqualTo("isNutritionist", true)
-                nutritionistsRef.get().addOnSuccessListener { documents ->
-                    val nutritionists = ArrayList<String>()
-                    for (document in documents) {
-                        nutritionists.add(document.data["name"].toString())
-                        nutritionistToId[document.data["name"].toString()] = document.id
-                    }
-
-                    val s: Spinner = findViewById(R.id.spnNutritionist)
-                    val adapter =
-                        ArrayAdapter(
-                            this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            nutritionists
-                        )
-                    s.adapter = adapter
-
-                    val bundle = intent.extras
-                    appointmentId = bundle?.getString("appointmentId")!!
-                    val nutritionistId = bundle.getString("nutritionistId")
-                    val nutritionistName = bundle.getString("nutritionistName")
-                    val date = bundle.getLong("date")
-                    val time = bundle.getString("time")
-                    findViewById<Spinner>(R.id.spnNutritionist).setSelection(
-                        nutritionists.indexOf(
-                            nutritionistName
-                        )
-                    )
-                    findViewById<TextView>(R.id.btnDate).text =
-                        SimpleDateFormat("dd/MM/yyyy").format(Date(date))
-                    findViewById<Spinner>(R.id.spnTime).setSelection(bookingSlots.indexOf(time))
-                    selectedDate = Date(date)
-                    progressBarDialog.dismiss()
+//            // Disable all fields
+//            findViewById<Spinner>(R.id.spnTime).isEnabled = false
+//            findViewById<Spinner>(R.id.spnNutritionist).isEnabled = false
+//            findViewById<Button>(R.id.btnDate).isEnabled = false
+//            findViewById<Button>(R.id.btnPost).isEnabled = false
+//            val customDialog = CustomDialog(this)
+//            customDialog.setText("Nutritionists can only delete appointments.")
+//            customDialog.setCallback {
+            val spnTime: Spinner = findViewById(R.id.spnTime)
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, bookingSlots)
+            spnTime.adapter = adapter
+            val progressBarDialog = ProgressBarDialog(this)
+            progressBarDialog.show()
+            val db = Firebase.firestore
+            val nutritionistsRef = db.collection("users").whereEqualTo("isNutritionist", true)
+            nutritionistsRef.get().addOnSuccessListener { documents ->
+                val nutritionists = ArrayList<String>()
+                for (document in documents) {
+                    nutritionists.add(document.data["name"].toString())
+                    nutritionistToId[document.data["name"].toString()] = document.id
                 }
+
+                val s: Spinner = findViewById(R.id.spnNutritionist)
+                val adapter =
+                    ArrayAdapter(
+                        this,
+                        android.R.layout.simple_spinner_dropdown_item,
+                        nutritionists
+                    )
+                s.adapter = adapter
+
+                val bundle = intent.extras
+                appointmentId = bundle?.getString("appointmentId")!!
+                val nutritionistId = bundle.getString("nutritionistId")
+                val nutritionistName = bundle.getString("nutritionistName")
+                val date = bundle.getLong("date")
+                val time = bundle.getString("time")
+                findViewById<Spinner>(R.id.spnNutritionist).setSelection(
+                    nutritionists.indexOf(
+                        nutritionistName
+                    )
+                )
+                findViewById<TextView>(R.id.btnDate).text =
+                    SimpleDateFormat("dd/MM/yyyy").format(Date(date))
+                findViewById<Spinner>(R.id.spnTime).setSelection(bookingSlots.indexOf(time))
+                selectedDate = Date(date)
+                progressBarDialog.dismiss()
+//                }
             }
-            customDialog.setCancellable(false)
-            customDialog.show()
+//            customDialog.setCancellable(false)
+//            customDialog.show()
         } else {
             val spnTime: Spinner = findViewById(R.id.spnTime)
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, bookingSlots)

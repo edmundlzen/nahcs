@@ -25,11 +25,12 @@ class NutritionistContentPosting : AppCompatActivity() {
         val postTitle = findViewById<EditText>(R.id.etPostTitle).text
         val postContent = findViewById<EditText>(R.id.etPostContent).text
 
-        if (postTitle.isEmpty() or postContent.isEmpty()) {
+        if (postTitle.isBlank() or postContent.isBlank()) {
             val customDialog = CustomDialog(this)
             customDialog.setText("Please fill in all the fields")
             customDialog.setCancellable(false)
             customDialog.show()
+            return
         }
         val progressBarDialog = ProgressBarDialog(this)
         progressBarDialog.show()
