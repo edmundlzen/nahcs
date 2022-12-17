@@ -18,6 +18,10 @@ class NotificationReceiver : BroadcastReceiver() {
         val text = intent.getStringExtra("NOTIFICATION_TEXT") ?: return
         val notificationId = intent.getIntExtra("NOTIFICATION_ID", 0)
 
+        val notificationsEnabled =
+            context.getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("notificationsOn", true)
+        if (!notificationsEnabled) return
+
         val notifiedAppointmentNotifications =
             context.getSharedPreferences("data", MODE_PRIVATE).getStringSet(
                 "notifiedAppointmentNotificationIds",

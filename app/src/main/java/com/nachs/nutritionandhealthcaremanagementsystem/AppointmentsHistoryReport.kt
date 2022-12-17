@@ -71,7 +71,8 @@ class AppointmentsHistoryReport : AppCompatActivity() {
                 calendar.time = appointment.getDate("date")!!
                 calendar.set(
                     Calendar.HOUR,
-                    appointment.getString("time")!!.split(":")[0].toInt()
+                    if (appointment.getString("time")!!.split(":")[0].toInt() == 12
+                    ) 0 else appointment.getString("time")!!.split(":")[0].toInt()
                 )
                 calendar.set(
                     Calendar.AM_PM,

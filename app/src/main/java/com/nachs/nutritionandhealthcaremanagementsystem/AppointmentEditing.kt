@@ -179,7 +179,10 @@ class AppointmentEditing : AppCompatActivity() {
         calendar.time = selectedDate!!
         calendar.set(
             Calendar.HOUR,
-            findViewById<Spinner>(R.id.spnTime).selectedItem.toString().split(":")[0].toInt()
+            if (findViewById<Spinner>(R.id.spnTime).selectedItem.toString()
+                    .split(":")[0].toInt() == 12
+            ) 0 else findViewById<Spinner>(R.id.spnTime).selectedItem.toString()
+                .split(":")[0].toInt()
         )
         calendar.set(
             Calendar.AM_PM,

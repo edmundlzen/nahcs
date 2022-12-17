@@ -53,7 +53,11 @@ public suspend fun refreshAppointmentNotifications(context: Context) =
             calendar.time = document.getDate("date")!!
             calendar.set(
                 Calendar.HOUR,
-                document.getString("time")!!.split(":")[0].toInt()
+                if (document.getString("time")!!
+                        .split(":")[0].toInt() == 12
+                ) 0 else document.getString(
+                    "time"
+                )!!.split(":")[0].toInt()
             )
             calendar.set(
                 Calendar.AM_PM,
