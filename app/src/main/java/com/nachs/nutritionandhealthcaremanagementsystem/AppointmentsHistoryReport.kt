@@ -70,8 +70,16 @@ class AppointmentsHistoryReport : AppCompatActivity() {
                 val calendar = Calendar.getInstance()
                 calendar.time = appointment.getDate("date")!!
                 calendar.set(
-                    Calendar.HOUR_OF_DAY,
+                    Calendar.HOUR,
                     appointment.getString("time")!!.split(":")[0].toInt()
+                )
+                calendar.set(
+                    Calendar.AM_PM,
+                    if (appointment.getString("time")!!.split(" ")[1] == "AM") {
+                        Calendar.AM
+                    } else {
+                        Calendar.PM
+                    }
                 )
                 val selectedDateTime = calendar.time
                 if (!selectedDateTime.before(Date())) {

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -53,5 +54,14 @@
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.nachs.nutritionandhealthcaremanagementsystem.NOTIFICATION" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

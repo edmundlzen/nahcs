@@ -32,6 +32,10 @@ class MemberSettings : AppCompatActivity() {
     fun onClickLogoutButton(view: View) {
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
         auth.signOut()
+        view.context.getSharedPreferences("data", MODE_PRIVATE).edit().putStringSet(
+            "notifiedAppointmentNotificationIds",
+            mutableSetOf()
+        ).clear().apply()
         val intent: Intent = Intent(this, UserTypeSelection::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)

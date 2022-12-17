@@ -9,11 +9,14 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 
 class AppointmentEditing : AppCompatActivity() {
     private var selectedDate: Date? = null
@@ -175,8 +178,16 @@ class AppointmentEditing : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         calendar.time = selectedDate!!
         calendar.set(
-            Calendar.HOUR_OF_DAY,
-            bookingSlots.indexOf(findViewById<Spinner>(R.id.spnTime).selectedItem.toString()) + 8
+            Calendar.HOUR,
+            findViewById<Spinner>(R.id.spnTime).selectedItem.toString().split(":")[0].toInt()
+        )
+        calendar.set(
+            Calendar.AM_PM,
+            if (findViewById<Spinner>(R.id.spnTime).selectedItem.toString().split(" ")[1] == "AM") {
+                Calendar.AM
+            } else {
+                Calendar.PM
+            }
         )
         val selectedDateTime = calendar.time
         if (selectedDateTime.before(Date())) {
@@ -233,18 +244,27 @@ class AppointmentEditing : AppCompatActivity() {
     }
 
     fun onClickDelete(view: View) {
-        val customDialog = CustomDialog(applicationContext)
+        val customDialog = CustomDialog(view.context)
         customDialog.setText("Are you sure you want to delete this appointment?")
         customDialog.setCallback {
-            val progressBarDialog = ProgressBarDialog(applicationContext)
+            val progressBarDialog = ProgressBarDialog(view.context)
             progressBarDialog.show()
 
             val db = Firebase.firestore
             db.collection("appointments").document(appointmentId).delete()
                 .addOnSuccessListener {
-                    val intent = Intent(this, ActiveAppointmentsReport::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(intent)
+                    val executor = Executors.newSingleThreadExecutor()
+                    executor.submit(Runnable {
+                        lifecycleScope.launch {
+                            refreshAppointmentNotifications(applicationContext)
+                            runOnUiThread {
+                                val intent =
+                                    Intent(view.context, ActiveAppointmentsReport::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                startActivity(intent)
+                            }
+                        }
+                    })
                 }
         }
         customDialog.setCancellable(false)

@@ -37,6 +37,7 @@ class Home : AppCompatActivity() {
         val executor = Executors.newSingleThreadExecutor()
         executor.submit(Runnable {
             lifecycleScope.launch {
+                refreshAppointmentNotifications(applicationContext)
                 val posts = getPosts()
                 runOnUiThread {
                     val recyclerView: RecyclerView = findViewById(R.id.rvPosts)

@@ -1,7 +1,6 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
 import DatePickerFragment
-import android.app.AlarmManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,11 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 
 class AppointmentBooking : AppCompatActivity() {
     private var selectedDate: Date? = null
@@ -95,8 +97,16 @@ class AppointmentBooking : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         calendar.time = selectedDate!!
         calendar.set(
-            Calendar.HOUR_OF_DAY,
-            bookingSlots.indexOf(findViewById<Spinner>(R.id.spnTime).selectedItem.toString()) + 8
+            Calendar.HOUR,
+            findViewById<Spinner>(R.id.spnTime).selectedItem.toString().split(":")[0].toInt()
+        )
+        calendar.set(
+            Calendar.AM_PM,
+            if (findViewById<Spinner>(R.id.spnTime).selectedItem.toString().split(" ")[1] == "AM") {
+                Calendar.AM
+            } else {
+                Calendar.PM
+            }
         )
         val selectedDateTime = calendar.time
         if (selectedDateTime.before(Date())) {
@@ -131,32 +141,23 @@ class AppointmentBooking : AppCompatActivity() {
                         "user" to auth.currentUser?.uid
                     )
                     appointmentsRef.add(appointment).addOnSuccessListener {
-                        // Create a notification for the user an hour before the appointment
-                        val am = getSystemService(ALARM_SERVICE) as AlarmManager
-                        val notificationReceiver = NotificationReceiver()
-                        am.setWindow(
-                            AlarmManager.RTC_WAKEUP,
-                            selectedDateTime.time - 1000 * 60 * 60,
-                            1000 * 60 * 10,
-                            notificationReceiver.getPendingIntent(
-                                this,
-                                Random().nextInt(),
-                                "Appointment Reminder",
-                                "You have an appointment with ${findViewById<Spinner>(R.id.spnNutritionist).selectedItem} at ${
-                                    findViewById<Spinner>(
-                                        R.id.spnTime
-                                    ).selectedItem
-                                } on ${SimpleDateFormat("dd/MM/yyyy").format(selectedDate)}"
-                            )
-                        )
-                        progressBarDialog.dismiss()
-                        val customDialog = CustomDialog(this)
-                        customDialog.setText("Appointment booked successfully!")
-                        customDialog.setCancellable(false)
-                        customDialog.setCallback {
-                            onBackPressed()
-                        }
-                        customDialog.show()
+                        val executor = Executors.newSingleThreadExecutor()
+                        executor.submit(Runnable {
+                            lifecycleScope.launch {
+                                refreshAppointmentNotifications(view.context)
+                                Log.d("Notification", "Notification refreshed")
+                                runOnUiThread {
+                                    progressBarDialog.dismiss()
+                                    val customDialog = CustomDialog(view.context)
+                                    customDialog.setText("Appointment booked successfully!")
+                                    customDialog.setCancellable(false)
+                                    customDialog.setCallback {
+                                        onBackPressed()
+                                    }
+                                    customDialog.show()
+                                }
+                            }
+                        })
                     }
                 } else {
                     progressBarDialog.dismiss()

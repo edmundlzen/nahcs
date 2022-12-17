@@ -65,4 +65,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
 
     implementation("com.vanniktech:android-image-cropper:4.5.0")
+    implementation 'com.google.code.gson:gson:2.10'
 }
