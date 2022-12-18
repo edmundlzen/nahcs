@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="PxUsage">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25px"
+        android:layout_marginTop="30px"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="350px"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inria_serif_bold"
+                android:gravity="center"
+                android:text="Wei Wei Nutrition"
+                android:textColor="@color/black"
+                android:textSize="36px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inria_serif_bold"
+                android:gravity="center"
+                android:text="Appointment Confirmation"
+                android:textColor="@color/black"
+                android:textSize="24px" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="25px"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="25px"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvForName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inria_serif_bold"
+            android:letterSpacing="0.03"
+            android:text="For: Mrs Ivy Ong"
+            android:textColor="@color/black"
+            android:textSize="18px" />
+
+        <TextView
+            android:id="@+id/tvWithName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inria_serif_bold"
+            android:letterSpacing="0.03"
+            android:text="With: Nutritionist Mandy"
+            android:textColor="@color/black"
+            android:textSize="18px" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inria_serif_bold"
+            android:letterSpacing="0.03"
+            android:text="Date: 12:00 AM, December 14 2022"
+            android:textColor="@color/black"
+            android:textSize="18px" />
+    </LinearLayout>
+</LinearLayout>

@@ -15,7 +15,7 @@
         android:id="@+id/tvAppointmentDate"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.8"
+        android:layout_weight="0.7"
         android:autoSizeMaxTextSize="16sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
@@ -60,4 +60,12 @@
         android:layout_weight="0.4"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_baseline_edit_24" />
+
+    <ImageButton
+        android:id="@+id/ibPrint"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_baseline_print_24" />
 </LinearLayout>

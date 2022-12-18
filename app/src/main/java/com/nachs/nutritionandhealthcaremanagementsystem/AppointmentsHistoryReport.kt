@@ -42,7 +42,10 @@ class AppointmentsHistoryReport : AppCompatActivity() {
                 val activeAppointments = getActiveAppointments()
                 runOnUiThread {
                     val recyclerView: RecyclerView = findViewById(R.id.rvActiveAppointments)
-                    recyclerView.adapter = ActiveAppointmentsAdapter(activeAppointments)
+                    recyclerView.adapter = ActiveAppointmentsAdapter(
+                        activeAppointments,
+                        null,
+                    )
                     progressBarDialog.dismiss()
                 }
             }

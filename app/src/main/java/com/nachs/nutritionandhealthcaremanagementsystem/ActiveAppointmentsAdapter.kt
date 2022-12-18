@@ -8,9 +8,18 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.reflect.KFunction4
 
-class ActiveAppointmentsAdapter(private val activeAppointments: ArrayList<ActiveAppointment>) :
+
+class ActiveAppointmentsAdapter(
+    private val activeAppointments: ArrayList<ActiveAppointment>,
+    private val generateAppointmentConfirmationPDF: (KFunction4<View, String, String, Date, Unit>)?,
+) :
     RecyclerView.Adapter<ActiveAppointmentsAdapter.ActiveAppointmentViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActiveAppointmentViewHolder {
@@ -52,6 +61,24 @@ class ActiveAppointmentsAdapter(private val activeAppointments: ArrayList<Active
 
             holder.activeAppointmentNutritionistName.context.startActivity(intent)
         }
+        holder.printButton.setOnClickListener {
+            if (generateAppointmentConfirmationPDF !== null) {
+                val auth = Firebase.auth
+                val db = Firebase.firestore
+                val username = db.collection("users").document(auth.currentUser!!.uid)
+                    .get().addOnSuccessListener { document ->
+                        if (document != null) {
+                            val name = document.getString("name")
+                            generateAppointmentConfirmationPDF!!(
+                                it,
+                                name!!,
+                                currentItem.nutritionistName,
+                                currentItem.date
+                            )
+                        }
+                    }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -65,5 +92,6 @@ class ActiveAppointmentsAdapter(private val activeAppointments: ArrayList<Active
             itemView.findViewById<TextView>(R.id.tvNutritionistName)
         val activeAppointmentEditButton =
             itemView.findViewById<ImageButton>(R.id.ibEditAppointment)
+        val printButton = itemView.findViewById<ImageButton>(R.id.ibPrint)
     }
 }
