@@ -1,5 +1,8 @@
 package com.nachs.nutritionandhealthcaremanagementsystem
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -46,6 +49,58 @@ class Home : AppCompatActivity() {
                 }
             }
         })
+
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+
+        // Set a water notifications alarm that runs every hour
+        val intent = Intent("com.nachs.nutritionandhealthcaremanagementsystem.NOTIFICATION")
+        intent.putExtra("NOTIFICATION_TITLE", "Water Reminder")
+        intent.putExtra(
+            "NOTIFICATION_TEXT", "Drink some water! It's good for you!"
+        )
+        intent.putExtra("NOTIFICATION_ID", 1)
+        intent.component = ComponentName(
+            "com.nachs.nutritionandhealthcaremanagementsystem",
+            "com.nachs.nutritionandhealthcaremanagementsystem.NotificationReceiver"
+        )
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            1,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            System.currentTimeMillis(),
+            1000 * 60 * 60,
+            pendingIntent
+        )
+
+        // Set an exercise notifications alarm that runs every 6 hours
+        val intent2 = Intent("com.nachs.nutritionandhealthcaremanagementsystem.NOTIFICATION")
+        intent2.putExtra("NOTIFICATION_TITLE", "Exercise Reminder")
+        intent2.putExtra(
+            "NOTIFICATION_TEXT", "Go for a walk! It's good for you!"
+        )
+        intent2.putExtra("NOTIFICATION_ID", 2)
+        intent2.component = ComponentName(
+            "com.nachs.nutritionandhealthcaremanagementsystem",
+            "com.nachs.nutritionandhealthcaremanagementsystem.NotificationReceiver"
+        )
+        val pendingIntent2 = PendingIntent.getBroadcast(
+            applicationContext,
+            1,
+            intent2,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            System.currentTimeMillis(),
+            1000 * 60 * 60 * 6,
+            pendingIntent2
+        )
     }
 
     private suspend fun getPosts(): ArrayList<Post> = withContext(Dispatchers.Default) {

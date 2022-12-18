@@ -11,6 +11,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import java.util.*
 
 
 class NotificationReceiver : BroadcastReceiver() {
@@ -20,6 +21,10 @@ class NotificationReceiver : BroadcastReceiver() {
         val notificationId = intent.getIntExtra("NOTIFICATION_ID", 0)
         val isWaterReminder = intent.getBooleanExtra("IS_WATER_REMINDER", false)
         val isExerciseReminder = intent.getBooleanExtra("IS_EXERCISE_REMINDER", false)
+
+        // Do not send any notifications if the time is not between 7am and 10pm
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        if (currentHour < 7 || currentHour > 22) return
 
         if (
             !isWaterReminder && !isExerciseReminder
