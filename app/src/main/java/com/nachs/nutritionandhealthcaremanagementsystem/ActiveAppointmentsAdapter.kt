@@ -46,7 +46,6 @@ class ActiveAppointmentsAdapter(
         }
         if (currentItem.isHistory) {
             holder.activeAppointmentEditButton.visibility = View.GONE
-            return
         }
         holder.activeAppointmentEditButton.setOnClickListener {
             val intent = Intent(
@@ -61,11 +60,36 @@ class ActiveAppointmentsAdapter(
 
             holder.activeAppointmentNutritionistName.context.startActivity(intent)
         }
+//        if (isNutritionist) {
+//            holder.printButton.visibility = View.GONE
+//            return
+//        }
+        val calendar = Calendar.getInstance()
+        calendar.time = currentItem.date
+        calendar.set(
+            Calendar.HOUR,
+            if (currentItem.time.split(":")[0].toInt() == 12
+            ) 0 else currentItem.time.split(":")[0].toInt()
+        )
+        calendar.set(
+            Calendar.AM_PM,
+            if (currentItem.time.split(" ")[1] == "AM") {
+                Calendar.AM
+            } else {
+                Calendar.PM
+            }
+        )
         holder.printButton.setOnClickListener {
             if (generateAppointmentConfirmationPDF !== null) {
                 val auth = Firebase.auth
                 val db = Firebase.firestore
-                val username = db.collection("users").document(auth.currentUser!!.uid)
+                db.collection("users").document(
+                    if (isNutritionist) {
+                        currentItem.userId
+                    } else {
+                        auth.currentUser!!.uid
+                    }
+                )
                     .get().addOnSuccessListener { document ->
                         if (document != null) {
                             val name = document.getString("name")
@@ -73,7 +97,7 @@ class ActiveAppointmentsAdapter(
                                 it,
                                 name!!,
                                 currentItem.nutritionistName,
-                                currentItem.date
+                                calendar.time
                             )
                         }
                     }

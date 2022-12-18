@@ -104,4 +104,9 @@ class Home : AppCompatActivity() {
         val intent = Intent(this, CaloriesCalculation::class.java)
         startActivity(intent)
     }
+
+    fun onClickStepsCounter(view: View) {
+        val intent = Intent(this, StepsCounter::class.java)
+        startActivity(intent)
+    }
 }
