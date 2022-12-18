@@ -18,58 +18,141 @@ class NotificationReceiver : BroadcastReceiver() {
         val title = intent.getStringExtra("NOTIFICATION_TITLE") ?: return
         val text = intent.getStringExtra("NOTIFICATION_TEXT") ?: return
         val notificationId = intent.getIntExtra("NOTIFICATION_ID", 0)
+        val isWaterReminder = intent.getBooleanExtra("IS_WATER_REMINDER", false)
+        val isExerciseReminder = intent.getBooleanExtra("IS_EXERCISE_REMINDER", false)
 
-        val notificationsEnabled =
-            context.getSharedPreferences("prefs", MODE_PRIVATE).getBoolean("notificationsOn", true)
-        if (!notificationsEnabled) return
+        if (
+            !isWaterReminder && !isExerciseReminder
+        ) {
+            val notificationsEnabled =
+                context.getSharedPreferences("prefs", MODE_PRIVATE)
+                    .getBoolean("notificationsOn", true)
+            if (!notificationsEnabled) return
 
-        val notifiedAppointmentNotifications =
-            context.getSharedPreferences("data", MODE_PRIVATE).getStringSet(
-                "notifiedAppointmentNotificationIds",
-                mutableSetOf()
-            )!!
+            val notifiedAppointmentNotifications =
+                context.getSharedPreferences("data", MODE_PRIVATE).getStringSet(
+                    "notifiedAppointmentNotificationIds",
+                    mutableSetOf()
+                )!!
 
-        if (notifiedAppointmentNotifications.contains(notificationId.toString())) {
-            Log.d("NotificationReceiver", "Notification already sent")
-            return
-        }
-        val mNotificationManager =
-            context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val id = "my_notification_channel"
-        val name = "My Notification Channel"
-        val description = "My Notification Channel Description"
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val mChannel = NotificationChannel(id, name, importance)
-        mChannel.description = description
-        mChannel.enableLights(true)
-        mChannel.enableVibration(true)
-        mNotificationManager.createNotificationChannel(mChannel)
-        val resultIntent = Intent(context, Home::class.java)
-        val resultPendingIntent = PendingIntent.getActivity(
-            context,
-            0,
-            resultIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-        val builder = NotificationCompat.Builder(context)
-            .setSmallIcon(R.drawable.logo)
-            .setContentTitle(title)
-            .setContentText(text)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setChannelId(id)
-            .setContentIntent(
-                resultPendingIntent
+            if (notifiedAppointmentNotifications.contains(notificationId.toString())) {
+                Log.d("NotificationReceiver", "Notification already sent")
+                return
+            }
+            val mNotificationManager =
+                context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            val id = "appointment_reminder_channel"
+            val name = "Appointment Reminders"
+            val description = "Reminders for upcoming appointments"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val mChannel = NotificationChannel(id, name, importance)
+            mChannel.description = description
+            mChannel.enableLights(true)
+            mChannel.enableVibration(true)
+            mNotificationManager.createNotificationChannel(mChannel)
+            val resultIntent = Intent(context, Home::class.java)
+            val resultPendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                resultIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
+            val builder = NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setChannelId(id)
+                .setContentIntent(
+                    resultPendingIntent
+                )
 
-        with(NotificationManagerCompat.from(context)) {
-            notify(notificationId, builder.build())
+            with(NotificationManagerCompat.from(context)) {
+                notify(notificationId, builder.build())
+            }
+
+            notifiedAppointmentNotifications.add(notificationId.toString())
+            context.getSharedPreferences("data", MODE_PRIVATE).edit().putStringSet(
+                "notifiedAppointmentNotificationIds",
+                notifiedAppointmentNotifications
+            ).clear().apply()
+            Log.d("NotificationReceiver", "Notification has been sent")
+        } else if (isWaterReminder) {
+            val notificationsEnabled =
+                context.getSharedPreferences("prefs", MODE_PRIVATE)
+                    .getBoolean("notificationsOn", true)
+            if (!notificationsEnabled) return
+
+            val mNotificationManager =
+                context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            val id = "water_reminder_channel"
+            val name = "Water Reminders"
+            val description = "Reminders to drink water"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val mChannel = NotificationChannel(id, name, importance)
+            mChannel.description = description
+            mChannel.enableLights(true)
+            mChannel.enableVibration(true)
+            mNotificationManager.createNotificationChannel(mChannel)
+            val resultIntent = Intent(context, Home::class.java)
+            val resultPendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                resultIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            val builder = NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setChannelId(id)
+                .setContentIntent(
+                    resultPendingIntent
+                )
+
+            with(NotificationManagerCompat.from(context)) {
+                notify(notificationId, builder.build())
+            }
+            Log.d("NotificationReceiver", "Notification has been sent")
+        } else if (isExerciseReminder) {
+            val notificationsEnabled =
+                context.getSharedPreferences("prefs", MODE_PRIVATE)
+                    .getBoolean("exerciseReminderNotificationsOn", true)
+            if (!notificationsEnabled) return
+
+            val mNotificationManager =
+                context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            val id = "exercise_reminder_channel"
+            val name = "Exercise Reminders"
+            val description = "Reminders to exercise"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val mChannel = NotificationChannel(id, name, importance)
+            mChannel.description = description
+            mChannel.enableLights(true)
+            mChannel.enableVibration(true)
+            mNotificationManager.createNotificationChannel(mChannel)
+            val resultIntent = Intent(context, Home::class.java)
+            val resultPendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                resultIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            val builder = NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setChannelId(id)
+                .setContentIntent(
+                    resultPendingIntent
+                )
+
+            with(NotificationManagerCompat.from(context)) {
+                notify(notificationId, builder.build())
+            }
+            Log.d("NotificationReceiver", "Notification has been sent")
         }
-
-        notifiedAppointmentNotifications.add(notificationId.toString())
-        context.getSharedPreferences("data", MODE_PRIVATE).edit().putStringSet(
-            "notifiedAppointmentNotificationIds",
-            notifiedAppointmentNotifications
-        ).clear().apply()
-        Log.d("NotificationReceiver", "Notification has been sent")
     }
 }
