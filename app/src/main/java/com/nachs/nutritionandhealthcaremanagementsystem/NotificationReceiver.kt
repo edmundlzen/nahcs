@@ -2,6 +2,7 @@ package com.nachs.nutritionandhealthcaremanagementsystem
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -43,13 +44,22 @@ class NotificationReceiver : BroadcastReceiver() {
         mChannel.enableLights(true)
         mChannel.enableVibration(true)
         mNotificationManager.createNotificationChannel(mChannel)
-
+        val resultIntent = Intent(context, Home::class.java)
+        val resultPendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            resultIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
         val builder = NotificationCompat.Builder(context)
             .setSmallIcon(R.drawable.logo)
             .setContentTitle(title)
             .setContentText(text)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setChannelId(id)
+            .setContentIntent(
+                resultPendingIntent
+            )
 
         with(NotificationManagerCompat.from(context)) {
             notify(notificationId, builder.build())
