@@ -166,4 +166,9 @@ class Home : AppCompatActivity() {
         val intent = Intent(this, StepsCounter::class.java)
         startActivity(intent)
     }
+
+    fun onClickActivityTracker(view: View) {
+        val intent = Intent(this, ActivityTracker::class.java)
+        startActivity(intent)
+    }
 }
