@@ -111,7 +111,7 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="#fc002c"
         android:onClick="onClickDelete"
-        android:text="Delete appointment"
+        android:text="Cancel appointment"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="bold"

@@ -8,5 +8,6 @@ data class Post(
     val content: String,
     val authorName: String,
     val authorProfilePicture: Bitmap?,
-    val postedAt: java.util.Date
+    val postedAt: java.util.Date,
+    val authorId: String
 )

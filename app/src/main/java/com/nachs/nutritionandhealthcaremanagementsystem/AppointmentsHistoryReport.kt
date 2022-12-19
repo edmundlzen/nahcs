@@ -92,6 +92,9 @@ class AppointmentsHistoryReport : AppCompatActivity() {
             val activeAppointments = ArrayList<ActiveAppointment>()
             val appointmentsData = appointmentsRef.get().await()
             for (appointment in appointmentsData) {
+                if (appointment.getBoolean("cancelled") == true) {
+                    continue
+                }
                 // Check if the date and time is in the past
                 val calendar = Calendar.getInstance()
                 calendar.time = appointment.getDate("date")!!

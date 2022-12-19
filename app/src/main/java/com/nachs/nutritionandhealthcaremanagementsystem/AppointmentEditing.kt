@@ -248,13 +248,13 @@ class AppointmentEditing : AppCompatActivity() {
 
     fun onClickDelete(view: View) {
         val customDialog = CustomDialog(view.context)
-        customDialog.setText("Are you sure you want to delete this appointment?")
+        customDialog.setText("Are you sure you want to cancel this appointment?")
         customDialog.setCallback {
             val progressBarDialog = ProgressBarDialog(view.context)
             progressBarDialog.show()
 
             val db = Firebase.firestore
-            db.collection("appointments").document(appointmentId).delete()
+            db.collection("appointments").document(appointmentId).update("cancelled", true)
                 .addOnSuccessListener {
                     val executor = Executors.newSingleThreadExecutor()
                     executor.submit(Runnable {

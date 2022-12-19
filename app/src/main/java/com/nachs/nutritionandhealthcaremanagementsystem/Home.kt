@@ -126,7 +126,8 @@ class Home : AppCompatActivity() {
                 post.getString("content")!!,
                 user.getString("name")!!,
                 userProfilePicture,
-                post.getDate("postedAt")!!
+                post.getDate("postedAt")!!,
+                userId
             )
             posts.add(post)
         }

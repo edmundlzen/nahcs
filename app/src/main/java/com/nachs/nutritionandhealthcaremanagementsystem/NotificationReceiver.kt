@@ -26,14 +26,14 @@ class NotificationReceiver : BroadcastReceiver() {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         if (currentHour < 7 || currentHour > 22) return
 
+        val notificationsEnabled =
+            context.getSharedPreferences("prefs", MODE_PRIVATE)
+                .getBoolean("notificationsOn", true)
+        if (!notificationsEnabled) return
+
         if (
             !isWaterReminder && !isExerciseReminder
         ) {
-            val notificationsEnabled =
-                context.getSharedPreferences("prefs", MODE_PRIVATE)
-                    .getBoolean("notificationsOn", true)
-            if (!notificationsEnabled) return
-
             val notifiedAppointmentNotifications =
                 context.getSharedPreferences("data", MODE_PRIVATE).getStringSet(
                     "notifiedAppointmentNotificationIds",

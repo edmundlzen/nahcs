@@ -57,6 +57,7 @@
         <activity android:name=".StepsCounter" />
         <activity android:name=".ActivityTracker" />
         <activity android:name=".ActivityAdding" />
+        <activity android:name=".FaqActivity" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

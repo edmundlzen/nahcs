@@ -23,6 +23,7 @@ class UserTypeSelection : AppCompatActivity() {
     fun onClickNutritionist(view: View) {
         val logoView: View = findViewById<View>(R.id.ivLogo)
         val intent: Intent = Intent(this, UserLogin::class.java)
+        intent.putExtra("fromNutritionist", true)
         val options: ActivityOptions =
             ActivityOptions.makeSceneTransitionAnimation(this, logoView, "logo")
         startActivity(intent, options.toBundle())

@@ -9,10 +9,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
-import kotlin.math.abs
 
 class PostsAdapter(private val posts: ArrayList<Post>) :
     RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
@@ -27,7 +27,8 @@ class PostsAdapter(private val posts: ArrayList<Post>) :
         val currentItem = posts[position]
         holder.nutritionist.text = "Posted by ${currentItem.authorName}"
         holder.title.text = currentItem.title
-        val postedDaysAgo = abs((currentItem.postedAt.time - Date().time) / 1000 / 60 / 60 / 24)
+        val postedDaysAgo =
+            (Date().time - currentItem.postedAt.time) / 1000 / 60 / 60 / 24
         holder.date.text = if (postedDaysAgo == 0L) {
             "Today"
         } else if (postedDaysAgo == 1L) {
@@ -79,6 +80,10 @@ class PostsAdapter(private val posts: ArrayList<Post>) :
                 customDialog.show()
             })
             holder.postActions.visibility = View.VISIBLE
+            val auth = Firebase.auth
+            if (currentItem.authorId != auth.currentUser?.uid) {
+                holder.editButton.visibility = View.GONE
+            }
         }
     }
 

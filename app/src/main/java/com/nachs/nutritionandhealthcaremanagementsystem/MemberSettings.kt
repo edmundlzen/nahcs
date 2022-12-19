@@ -69,4 +69,9 @@ class MemberSettings : AppCompatActivity() {
         builder.setCancellable(false)
         builder.show()
     }
+
+    fun onClickFaq(view: View) {
+        val intent = Intent(this, FaqActivity::class.java)
+        startActivity(intent)
+    }
 }

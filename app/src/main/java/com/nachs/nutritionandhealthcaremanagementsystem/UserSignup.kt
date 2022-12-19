@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.DateFormat
@@ -39,7 +40,7 @@ class UserSignup : AppCompatActivity() {
 
             if (password.isBlank()) {
                 etPassword.setBackgroundResource(R.drawable.platinum_rounded_background)
-            } else if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$"))) {
+            } else if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\w\\W]{8,}\$"))) {
                 etPassword.setBackgroundResource(R.drawable.platinum_rounded_background_red_edge)
             } else {
                 etPassword.setBackgroundResource(R.drawable.platinum_rounded_background_green_edge)
@@ -93,14 +94,47 @@ class UserSignup : AppCompatActivity() {
         if (
             name.isEmpty() or
             gender.isEmpty() or
-            (formatter.parse(birthDate) == null) or
+            try {
+                formatter.parse(birthDate)
+                false
+            } catch (e: Exception) {
+                true
+            } or
             email.isEmpty() or
             phone.isEmpty() or
             password.isEmpty() or
             !tnc.isChecked
         ) {
             val customDialog = CustomDialog(this)
-            customDialog.setText("Please fill all the fields and accept the terms and conditions.")
+            var customDialogText = "Please fill in the following fields:\n"
+            if (name.isEmpty()) {
+                customDialogText += "Name\n"
+            }
+            if (gender.isEmpty()) {
+                customDialogText += "Gender\n"
+            }
+            if (try {
+                    formatter.parse(birthDate)
+                    false
+                } catch (e: Exception) {
+                    true
+                }
+            ) {
+                customDialogText += "Birth Date\n"
+            }
+            if (email.isEmpty()) {
+                customDialogText += "Email\n"
+            }
+            if (phone.isEmpty()) {
+                customDialogText += "Phone\n"
+            }
+            if (password.isEmpty()) {
+                customDialogText += "Password\n"
+            }
+            if (!tnc.isChecked) {
+                customDialogText += "Terms and Conditions\n"
+            }
+            customDialog.setText(customDialogText)
             customDialog.setCancellable(false)
             customDialog.setCallback {
                 customDialog.dismiss()
@@ -122,7 +156,7 @@ class UserSignup : AppCompatActivity() {
         }
 
         // Check if password is at least 8 characters long, contains at least one uppercase letter, one lowercase letter and one digit
-        if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$"))) {
+        if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\w\\W]{8,}\$"))) {
             val customDialog = CustomDialog(this)
             customDialog.setText("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one digit.")
             customDialog.setCancellable(false)
@@ -205,6 +239,7 @@ class UserSignup : AppCompatActivity() {
                             customDialog.show()
                         }
                         .addOnFailureListener {
+                            val error = it
                             progressBarDialog.dismiss()
                             val customDialog = CustomDialog(this)
                             customDialog.setText("An error occurred. Please try again.")
@@ -215,14 +250,26 @@ class UserSignup : AppCompatActivity() {
                             customDialog.show()
                         }
                 } else {
-                    progressBarDialog.dismiss()
-                    val customDialog = CustomDialog(this)
-                    customDialog.setText("An error occurred while creating your account. Please try again.")
-                    customDialog.setCancellable(false)
-                    customDialog.setCallback {
-                        customDialog.dismiss()
+                    val error = task.exception
+                    if (error is FirebaseAuthUserCollisionException) {
+                        progressBarDialog.dismiss()
+                        val customDialog = CustomDialog(this)
+                        customDialog.setText("This email is already registered.")
+                        customDialog.setCancellable(false)
+                        customDialog.setCallback {
+                            customDialog.dismiss()
+                        }
+                        customDialog.show()
+                    } else {
+                        progressBarDialog.dismiss()
+                        val customDialog = CustomDialog(this)
+                        customDialog.setText("An error occurred. Please try again.")
+                        customDialog.setCancellable(false)
+                        customDialog.setCallback {
+                            customDialog.dismiss()
+                        }
+                        customDialog.show()
                     }
-                    customDialog.show()
                 }
             }
     }
