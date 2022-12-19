@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llAppointmentsReportRow"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/white"
+    android:elevation="2px"
+    tools:ignore="PxUsage">
+
+    <LinearLayout
+        android:layout_width="160px"
+        android:layout_height="40px"
+        android:background="@drawable/border_background">
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inria_serif_regular"
+            android:gravity="center"
+            android:text="User"
+            android:textColor="@color/black"
+            android:textSize="16px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="160px"
+        android:layout_height="40px"
+        android:background="@drawable/border_background">
+
+        <TextView
+            android:id="@+id/tvNutritionistName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inria_serif_regular"
+            android:gravity="center"
+            android:text="Nutritionist"
+            android:textColor="@color/black"
+            android:textSize="16px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="130px"
+        android:layout_height="40px"
+        android:background="@drawable/border_background">
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inria_serif_regular"
+            android:gravity="center"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:textSize="16px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="85px"
+        android:layout_height="40px"
+        android:background="@drawable/border_background">
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inria_serif_regular"
+            android:gravity="center"
+            android:text="Time"
+            android:textColor="@color/black"
+            android:textSize="16px" />
+    </LinearLayout>
+</LinearLayout>

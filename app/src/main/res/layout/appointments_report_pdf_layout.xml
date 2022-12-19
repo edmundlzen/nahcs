@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="842px"
+    android:orientation="vertical"
+    tools:ignore="PxUsage">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30px"
+        android:layout_marginTop="30px"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30px"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="350px"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inria_serif_bold"
+                android:text="Wei Wei Nutrition"
+                android:textColor="@color/black"
+                android:textSize="36px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inria_serif_regular"
+                android:text="Appointments Report"
+                android:textColor="@color/black"
+                android:textSize="24px" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30px"
+        android:background="@color/white"
+        android:elevation="2px">
+
+        <LinearLayout
+            android:layout_width="160px"
+            android:layout_height="40px"
+            android:background="@drawable/border_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inria_serif_bold"
+                android:gravity="center"
+                android:text="User"
+                android:textColor="@color/black"
+                android:textSize="16px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="160px"
+            android:layout_height="40px"
+            android:background="@drawable/border_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inria_serif_bold"
+                android:gravity="center"
+                android:text="Nutritionist"
+                android:textColor="@color/black"
+                android:textSize="16px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="130px"
+            android:layout_height="40px"
+            android:background="@drawable/border_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inria_serif_bold"
+                android:gravity="center"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:textSize="16px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="85px"
+            android:layout_height="40px"
+            android:background="@drawable/border_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inria_serif_bold"
+                android:gravity="center"
+                android:text="Time"
+                android:textColor="@color/black"
+                android:textSize="16px" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAppointments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="30px"
+        android:layout_marginBottom="30px"
+        android:minWidth="535px"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+</LinearLayout>

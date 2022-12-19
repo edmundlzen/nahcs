@@ -92,7 +92,7 @@ class Home : AppCompatActivity() {
         )
         val pendingIntent2 = PendingIntent.getBroadcast(
             applicationContext,
-            1,
+            2,
             intent2,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
