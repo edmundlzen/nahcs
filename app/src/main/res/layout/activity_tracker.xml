@@ -161,8 +161,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="10dp"
         android:clipToPadding="false"
-        android:elevation="2dp"
-        android:outlineProvider="bounds"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
