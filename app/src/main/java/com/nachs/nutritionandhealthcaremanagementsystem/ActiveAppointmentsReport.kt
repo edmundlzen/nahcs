@@ -138,7 +138,7 @@ class ActiveAppointmentsReport : AppCompatActivity() {
         Date: Date
     ) {
         val appointmentConfirmationPDFView = layoutInflater.inflate(
-            R.layout.appointment_report_pdf_layout,
+            R.layout.appointment_confirmation_pdf_layout,
             null
         )
         appointmentConfirmationPDFView.findViewById<TextView>(R.id.tvForName).text = "For: $forName"

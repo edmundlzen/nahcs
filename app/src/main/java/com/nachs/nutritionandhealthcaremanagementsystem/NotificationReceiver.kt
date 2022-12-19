@@ -120,7 +120,7 @@ class NotificationReceiver : BroadcastReceiver() {
                 notify(notificationId, builder.build())
             }
             Log.d("NotificationReceiver", "Notification has been sent")
-        } else if (isExerciseReminder) {
+        } else {
             val notificationsEnabled =
                 context.getSharedPreferences("prefs", MODE_PRIVATE)
                     .getBoolean("exerciseReminderNotificationsOn", true)

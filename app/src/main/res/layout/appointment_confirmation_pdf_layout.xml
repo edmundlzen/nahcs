@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/inria_serif_bold"
+                android:fontFamily="@font/inria_serif_regular"
                 android:gravity="center"
                 android:text="Appointment Confirmation"
                 android:textColor="@color/black"

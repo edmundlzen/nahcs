@@ -59,6 +59,7 @@ class Home : AppCompatActivity() {
             "NOTIFICATION_TEXT", "Drink some water! It's good for you!"
         )
         intent.putExtra("NOTIFICATION_ID", 1)
+        intent.putExtra("IS_WATER_REMINDER", true)
         intent.component = ComponentName(
             "com.nachs.nutritionandhealthcaremanagementsystem",
             "com.nachs.nutritionandhealthcaremanagementsystem.NotificationReceiver"
@@ -84,6 +85,7 @@ class Home : AppCompatActivity() {
             "NOTIFICATION_TEXT", "Go for a walk! It's good for you!"
         )
         intent2.putExtra("NOTIFICATION_ID", 2)
+        intent2.putExtra("IS_EXERCISE_REMINDER", true)
         intent2.component = ComponentName(
             "com.nachs.nutritionandhealthcaremanagementsystem",
             "com.nachs.nutritionandhealthcaremanagementsystem.NotificationReceiver"
